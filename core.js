@@ -21,6 +21,7 @@ function firstRecord(q,kind,observed=null,direction='forward',reason=null){const
 function assist(q,reason='hint'){q.assisted=true;const k=String(q.stroke);q.records[k]??={expected:q.stroke,observed:null,direction:null,kind:'unobserved',assisted:true,at:new Date().toISOString(),engine:'trace-2.0'};q.records[k].help=reason;}
 function uncertain(q,reason){q.uncertain=true;const r=firstRecord(q,'uncertain',null,null,reason);r.interrupted=reason;}
 function award(state,ids,rng=Math.random){const s=active(state);if(!s||!s.questions.every(q=>q.complete))return null;if(s.reward)return s.reward;const available=ids.filter(id=>!state.cards.includes(id));s.repeat=!available.length;const choices=available.length?available:ids;s.reward=state.cards.length===0?ids[0]:choices[Math.min(choices.length-1,Math.floor(rng()*choices.length))];if(!state.cards.includes(s.reward))state.cards.push(s.reward);return s.reward;}
+function resetCards(state){state.cards=[];if(active(state)?.reward)state.activeId=null;return state;}
 function validate(x,counts){
  const check=(v,m)=>{if(!v)throw Error(m);},str=v=>typeof v==='string'&&v.length<150,integer=(v,max)=>Number.isInteger(v)&&v>=0&&v<=max,unique=a=>new Set(a).size===a.length;
  check(x&&x.version===2,'対応していない保存形式です');check(integer(x.revision,1e9)&&integer(x.cursor,1e9)&&integer(x.focusCursor,1e9),'巡回位置が不正です');
@@ -34,7 +35,7 @@ function validate(x,counts){
    for(const [k,r]of Object.entries(q.records)){check(/^[0-7]$/.test(k)&&r&&r.expected===+k&&(r.observed===null||integer(r.observed,7))&&['correct','order','direction','uncertain','unobserved'].includes(r.kind)&&typeof r.assisted==='boolean'&&['forward','reverse',null].includes(r.direction)&&str(r.at)&&str(r.engine),'画の記録形式が不正です');if(n)check(+k<n&&(r.observed===null||r.observed<n),'記録の画番号が不正です');for(const opt of ['reason','interrupted','help'])check(r[opt]===undefined||r[opt]===null||str(r[opt]),'補助記録が不正です');}
    if(qi<s.index)check(q.complete,'途中の文字が未完了です');if(qi>s.index)check(!q.complete&&q.stroke===0,'出題位置が不正です');
   }
-  if(s.reward)check(s.index===5&&s.questions.every(q=>q.complete)&&x.cards.includes(s.reward),'報酬が不整合です');else check(s.index<5,'報酬未確定の完了記録です');
+  if(s.reward)check(s.index===5&&s.questions.every(q=>q.complete),'報酬が不整合です');else check(s.index<5,'報酬未確定の完了記録です');
  }
  check(x.activeId===null||x.sessions.some(s=>s.id===x.activeId),'再開先が見つかりません');return x;
 }
@@ -42,5 +43,5 @@ const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 function candidates(paths,p,tolerance=START_TOLERANCE){const list=[];paths.forEach((points,index)=>{for(const reverse of [false,true]){const arr=reverse?points.slice().reverse():points;if(dist(arr[0],p)<=tolerance)list.push({index,reverse,points:arr,progress:0,error:dist(arr[0],p),steps:1,alive:true});}});return list;}
 function advance(c,from,to,tolerance=PATH_TOLERANCE){if(!c.alive)return;const n=Math.max(1,Math.ceil(dist(from,to)/1.5));for(let step=1;step<=n;step++){const p={x:from.x+(to.x-from.x)*step/n,y:from.y+(to.y-from.y)*step/n};let best=c.progress,d=Infinity;for(let i=Math.max(0,c.progress-4);i<=Math.min(c.points.length-1,c.progress+16);i++){const dd=dist(p,c.points[i]);if(dd<d){d=dd;best=i;}}if(d>tolerance||best<c.progress-3){c.alive=false;return;}c.progress=Math.max(c.progress,best);c.error+=d;c.steps++;}}
 function resolve(list,travel){if(travel<4)return null;const valid=list.filter(c=>c.alive&&c.progress>=Math.min(4,Math.floor(c.points.length*.2))).sort((a,b)=>a.error/a.steps-b.error/b.steps);if(valid.length===1)return valid[0];if(valid.length>1&&valid[1].error/valid[1].steps-valid[0].error/valid[0].steps>1.6)return valid[0];return null;}
-const api={CHARS,START_TOLERANCE,PATH_TOLERANCE,fresh,start,active,firstRecord,assist,uncertain,award,validate,dist,candidates,advance,resolve};if(typeof module!=='undefined')module.exports=api;else root.RailCore=api;
+const api={CHARS,START_TOLERANCE,PATH_TOLERANCE,fresh,start,active,firstRecord,assist,uncertain,award,resetCards,validate,dist,candidates,advance,resolve};if(typeof module!=='undefined')module.exports=api;else root.RailCore=api;
 })(globalThis);
