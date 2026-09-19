@@ -306,6 +306,171 @@ window.RAIL_DATA = {
       "license": "CC BY-SA 3.0",
       "author": "Ulrich Apel",
       "review": "source-order verified; iPad tolerance pending"
+    },
+    "い": {
+      "paths": [
+        "M21.5,29.66c2.01,2.17,2.61,4.68,2.17,7.43c-3.09,19.16-1.03,32.01,7.93,41.45c6.12,6.45,6.26,3.14,7.04-5.21",
+        "M72.96,36.51c9.44,8.05,17.79,18.82,18.41,33.83"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03044.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "つ": {
+      "paths": [
+        "M14,44.75c1.88,1.62,4.68,2.09,8.12,0.62c17.88-7.62,30-11.12,44.88-10.88c12.56,0.21,22.98,7.17,22.87,19.17c-0.18,18.77-24.75,28.71-45.01,32.08"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03064.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "し": {
+      "paths": [
+        "M39.12,17.5c1.25,3.12,0.93,6.74,0.38,10.25c-2.12,13.5-3,26.5-3,39.12c0,27.38,19.88,30.12,45.5,17.25"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03057.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "く": {
+      "paths": [
+        "M60.66,15c0.5,1.62,0.35,5.44-1,7.38c-6.75,9.62-14.3,19.08-18.62,24.5c-4,5-3.79,7.03-0.88,11c5.5,7.5,12.75,18.75,17.62,27.25c1.48,2.59,2.75,4.75,4.5,8.62"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0304f.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "へ": {
+      "paths": [
+        "M15,48.75c2.25,1.62,4.67,1.96,7-0.38c3.62-3.62,7.46-6.54,11.25-10.5c5.5-5.75,8.48-4.75,13.12-0.88c12.12,10.12,30.38,25.12,33.38,27.38c3,2.26,12.37,10.38,13.87,11.63"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03078.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "り": {
+      "paths": [
+        "M38.75,25.25c1.25,1.5,2.24,4.03,1.62,6.62c-2.88,12.13-6.29,29.65-4.25,42.38c2,12.5,1.75-0.75,5.62-6.25",
+        "M69.37,18.75c2.25,2.12,2.88,4.12,2.88,6.5c0,2.38,0,26.38,0,35.75c0,16.5-5,25.75-12.62,33.12"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0308a.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "こ": {
+      "paths": [
+        "M34.75,26.75c1.12,0.88,2.91,2.01,6,1.5c7.62-1.25,14.11-2.56,22.38-2.62c15.5-0.12,5.88,5-5.75,9",
+        "M30,68.12c2.25,14.5,15.26,17.96,31,16.75c6.5-0.5,11.88-1.25,17.62-2.88"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03053.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "う": {
+      "paths": [
+        "M42,15.5c5.62,2.12,9.62,3,12.88,3c8.27,0,8,1.12-0.38,5.5",
+        "M33,42.38c2.12,1.12,4.12,2.88,8.5,1.38c4.38-1.5,12.75-7.12,18.5-7c5.75,0.12,10.25,5,10.25,18c0,15.49-8.25,30.24-24.37,41.24"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03046.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "て": {
+      "paths": [
+        "M20.5,26.38c1.87,1.62,4.42,1.97,8.12,1.37c21.75-3.5,33-5.12,50.12-8.38c12.34-2.34,13-0.88,0.38,1.38c-17.89,3.19-33.78,19.12-33.78,37.62c0,20.5,17.91,30.25,35.16,30.25"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03066.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "と": {
+      "paths": [
+        "M35.5,18.38c1.74,0.74,3.62,2.62,4.12,5.37c0.5,2.75,4.75,25,5.38,28.12",
+        "M78.12,25.5c0.25,1.88,0.04,4.09-2.25,5.75c-6.37,4.63-13.22,8.49-22.75,15.25c-12.88,9.12-21.62,18.38-21.62,27.5c0,10.12,8.5,13.88,26.88,13.88c6.25,0,14.75-0.12,21.62-1.25"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03068.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "に": {
+      "paths": [
+        "M24.53,22.75c1.25,1.5,1.62,3.75,1.12,6.38c-3,15.88-9,32.5-7.38,47.62c2.02,18.84,4.5,5.75,8.5-3.5",
+        "M53.2,30.64c0.96,0.79,2.44,1.58,5.1,1.35c6.98-0.61,15.01-3.3,22.04-3.36c13.19-0.11,1.5,3.75-8.39,7.35",
+        "M52.53,68c1.76,12.92,11.92,16.01,24.23,14.93c5.08-0.45,8.9-0.8,14.27-2.06"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0306b.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "か": {
+      "paths": [
+        "M24.62,38.62c1.88,1.62,4.65,2.33,8.62,1c25.5-8.5,29.5-4.13,29.5,7.62c0,9.38-1.24,17.46-4.25,25.25c-7.62,19.76-10.87,17.39-16.12,10.89",
+        "M48.5,17.5c1,1.38,1.29,4.7,0.5,7.12c-5,15.25-18.02,40.93-19.62,43.88c-3.12,5.75-6.38,11.88-9.38,16.25",
+        "M77.37,31.62c7.5,6.88,13.25,15.75,15,24.88"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0304b.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "た": {
+      "paths": [
+        "M24.38,35.38c1.38,0.62,3.88,1.51,6.38,1.12c6.5-1,16.25-2.88,24.88-4.75c2.64-0.57,5.38-1.5,7.62-2.38",
+        "M45,16.88c0.75,1.25,0.87,3.62,0.38,5.25c-6.35,20.94-12.75,36.37-18.88,52.37c-1.36,3.56-4.75,11.75-6,14.62",
+        "M56.38,53.25c12.38-2.75,18.25-3.7,23.62-3.12c15.12,1.62-1.12,2.25-4.25,4.88",
+        "M54.13,82.25c4.38,7,14.25,8.12,34.5,5.62"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0305f.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "な": {
+      "paths": [
+        "M22.88,28.96c1.18,0.58,3.3,1.1,5.47,1.05c5.53-0.13,10.9-0.98,16.52-2.42c4.82-1.23,9.13-3.12,11.38-4.22",
+        "M42.99,14c0.63,0.89,0.56,2.52,0.31,3.72c-2.96,14.16-7.95,26.56-14.25,37.87c-2.05,3.69-4.25,7.24-6.55,10.65",
+        "M72.26,23.25c6.88,2.5,12.62,5.62,14.75,9.5c4.06,7.41-0.25,3.38-3.5,3.88",
+        "M68.88,44.62c-1,1.88-2.14,5.24-1.88,8.25c0.62,7,1.5,13.12,1.5,20.62c0,20-27.88,19.75-27.88,9.38c0-5.62,8.25-8.25,13.88-8.25c8.75,0,21.5,3.25,29.75,11.5"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0306a.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    },
+    "の": {
+      "paths": [
+        "M53.82,28.62c1,1.5,1.34,4.12,0.88,6.62c-1.75,9.5-6.89,25-10.75,33.12c-9.63,20.26-16.55,14.74-24.38-1.98c-9.13-19.5,23.5-48.88,50.63-40.38c32.38,10.15,28,54.62-4.75,60.88"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0306e.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
     }
   },
   "cards": [
