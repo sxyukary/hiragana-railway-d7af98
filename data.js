@@ -486,7 +486,7 @@ window.RAIL_DATA = {
       "credit": "MaedaAkihiko",
       "sourceTitle": "JRW Series227-0 A48.jpg",
       "license": "CC0",
-      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source": "https://commons.wikimedia.org/wiki/File:JRW_Series227-0_A48.jpg",
       "change": "Wikimedia提供の縮小画像を使用。写真の描き換えなし。",
       "photoDescription": "A rapid train \"City Liner\" bound for Hiroshima, led by the 227-0 series A48 formation, running between Itsukaichi Station and Shin-Inokuchi Station on the JR Sanyo Main Line."
@@ -503,7 +503,7 @@ window.RAIL_DATA = {
       "credit": "Rick888chen",
       "sourceTitle": "JR West 500 series shinkansen set V8 at Hakata Station 20200115.jpg",
       "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "source": "https://commons.wikimedia.org/wiki/File:JR_West_500_series_shinkansen_set_V8_at_Hakata_Station_20200115.jpg",
       "change": "Wikimedia提供の縮小画像を使用。写真の描き換えなし。",
       "photoDescription": "JR West 500 series shinkansen set V8 at Hakata Station"
@@ -520,7 +520,7 @@ window.RAIL_DATA = {
       "credit": "Samson Ng . D201@EAL",
       "sourceTitle": "N700-8000 Series Shinkansen EMU.jpg",
       "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "source": "https://commons.wikimedia.org/wiki/File:N700-8000_Series_Shinkansen_EMU.jpg",
       "change": "Wikimedia提供の縮小画像を使用。写真の描き換えなし。",
       "photoDescription": "JR Kyushu"
@@ -537,7 +537,7 @@ window.RAIL_DATA = {
       "credit": "Kazehayashi",
       "sourceTitle": "800 Series in Kagoshima-Chuo.jpg",
       "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "source": "https://commons.wikimedia.org/wiki/File:800_Series_in_Kagoshima-Chuo.jpg",
       "change": "Wikimedia提供の縮小画像を使用。写真の描き換えなし。",
       "photoDescription": "​少數只行駛九州新幹線區間的櫻花號班次以800系行駛"
@@ -554,7 +554,7 @@ window.RAIL_DATA = {
       "credit": "東風みるく",
       "sourceTitle": "L Kagoshima 883.jpg",
       "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "source": "https://commons.wikimedia.org/wiki/File:L_Kagoshima_883.jpg",
       "change": "Wikimedia提供の縮小画像を使用。写真の描き換えなし。",
       "photoDescription": "JR鹿児島本線枝光駅で撮影"
@@ -571,7 +571,7 @@ window.RAIL_DATA = {
       "credit": "東風みるく",
       "sourceTitle": "L Nippo 885.jpg",
       "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "source": "https://commons.wikimedia.org/wiki/File:L_Nippo_885.jpg",
       "change": "Wikimedia提供の縮小画像を使用。写真の描き換えなし。",
       "photoDescription": "​JR日豊本線朽網～苅田間で撮影"
@@ -588,7 +588,7 @@ window.RAIL_DATA = {
       "credit": "spaceaero2",
       "sourceTitle": "JRkyusyu 787 tsubame 9cars kumoro.jpg",
       "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
       "source": "https://commons.wikimedia.org/wiki/File:JRkyusyu_787_tsubame_9cars_kumoro.jpg",
       "change": "Wikimedia提供の縮小画像を使用。写真の描き換えなし。",
       "photoDescription": "JR九州 787系特急形電車 特急「つばめ」"
@@ -605,7 +605,7 @@ window.RAIL_DATA = {
       "credit": "t-mizo",
       "sourceTitle": "700 series SHINKANSEN called \"Hikari Rail Star\" (Nishi-Akashi, Hyogo, Japan).jpg",
       "license": "CC BY 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
       "source": "https://commons.wikimedia.org/wiki/File:700_series_SHINKANSEN_called_%22Hikari_Rail_Star%22_(Nishi-Akashi,_Hyogo,_Japan).jpg",
       "change": "Wikimedia提供の縮小画像を使用。写真の描き換えなし。",
       "photoDescription": "EOS 60D+EF-S 18-55mm f/3.5-5.6\n西明石駅よりひかりレールスター車両こだま\n\n700系7000番台ですね"

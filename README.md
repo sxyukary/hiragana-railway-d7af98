@@ -87,11 +87,13 @@
 ## ファイルと再検証
 
 - リポジトリ直下：GitHub Pagesで公開するゲーム本体。HTML・CSS・JS・画像・出典一覧。
+- `scripts/build-sources.cjs`：`data.js` の文字・カード情報から `sources.html` を再生成。
 - `tests/core.test.cjs`：出題・状態・保存の検証・報酬・軌跡判定。
 - `tests/browser.test.cjs`：実際のブラウザ入力と画面遷移。
 - `serve.py`：家庭内試用サーバー。公開用ファイルだけを配信し、一覧表示はしません。
 
 ```sh
+node scripts/build-sources.cjs
 node tests/core.test.cjs
 python3 serve.py
 # 別ターミナルで、必要ならPlaywrightを読み込めるNODE_PATHを指定する。
