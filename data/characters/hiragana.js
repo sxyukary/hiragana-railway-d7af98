@@ -363,5 +363,53 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
       "author": "Ulrich Apel",
       "review": "source-order verified; iPad tolerance pending"
     }
+  ],
+  [
+    "き",
+    {
+      "paths": [
+        "M30.5,30.25c1.88,0.75,4.64,1.06,5.88,0.88c6.75-1,22.25-4.5,26.5-6c2.17-0.76,3.5-1.25,4.88-2.12",
+        "M36.25,48.7c2.01,0.85,4.97,1.2,6.29,0.99c7.23-1.13,23.82-5.09,28.37-6.79c2.32-0.86,3.75-1.41,5.22-2.4",
+        "M42,14.12c1.5,0.88,3.13,2.94,4,5.12c5.5,13.76,16,29.26,26.37,40.76c7.64,8.47,9.12,9.38-6,3.88",
+        "M33.75,83.25c10.62,9.75,27.25,8.62,38.12,5"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0304d.svg", "viewBox": "0 0 109 109", "license": "CC BY-SA 3.0", "author": "Ulrich Apel", "review": "source-order & textbook quality verified (4-stroke separated)"
+    }
+  ],
+  [
+    "け",
+    {"paths":["M24.67,19.75c1.25,1.5,2.62,3.75,2.12,6.38c-3,15.88-6.5,29.5-4.88,44.62c2.02,18.84,2.25,4.75,6.75-3.5","M53.67,38.62c2.12,1.38,4.28,1.89,6.88,1.5c8.25-1.25,15.39-2.57,20.62-4c2.76-0.74,5.26-1.12,6.88-1.12","M71.67,14.38c2.13,1.37,2.88,3.35,2.88,5.12c0,11.62,0.12,20.38,0.12,30.12c0,20.75-0.62,30.88-12.5,42.25"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/03051.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order & textbook quality verified"}
+  ],
+  [
+    "さ",
+    {"paths":["M27,38.9c2.42,1.33,5.38,1.47,8.32,1.06c8.79-1.24,28.67-7.76,34.15-10.43c2.79-1.36,3.78-1.91,6.28-3.53","M41.5,13.88c1.5,0.88,3.63,2.94,4.5,5.12c5.5,13.75,15.25,27.62,26.87,39.5c7.98,8.15,6.38,10-6,3.12","M35.25,80.5c4.5,11.75,20.88,12.5,38.38,7.5"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/03055.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order & textbook quality verified (3-stroke separated)"}
+  ],
+  [
+    "ち",
+    {"paths":["M24.5,32.62c1.38,0.62,3.88,1.51,6.38,1.12c6.5-1,18.25-4.12,26.88-6c2.64-0.57,5.38-1.5,7.62-2.38","M45.62,15.62c0.75,1.25,0.71,3.58,0.38,5.25c-3,15-4.25,22.59-8.38,38.62c-3.25,12.62-5.38,11.12,3.62,4.38c8.29-6.21,19.75-9.5,28.5-9.5c8.62,0,14.58,5.88,14.5,14.5c-0.12,13.5-16.5,20.62-29.88,23.25"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/03061.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order & textbook quality verified"}
+  ],
+  [
+    "は",
+    {"paths":["M24.51,18c1.25,1.5,2.15,4,1.62,6.62c-3.5,17.62-6.98,36.4-4,54.88c2.5,15.5,1.12,2,5.62-6.25","M49.64,37.89c2.41,1.57,4.85,2.16,7.8,1.71c9.36-1.43,17.46-2.94,23.4-4.57c3.12-0.86,5.96-1.29,7.8-1.29","M69.77,16.5c2.25,2.12,2.88,4.12,2.88,6.5c0,2.38,1.5,38.62,1.5,48c0,22.5-30.62,19.62-30.62,10.5c0-9.75,23.88-5.62,29.5-2.88c5.62,2.74,11.98,8.26,13.36,9.38"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/0306f.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order & textbook quality verified"}
+  ],
+  [
+    "ひ",
+    {"paths":["M20,25.12c1.25,0.88,3.75,2.25,6.5,1.38c2.75-0.87,7.31-2.38,11.38-4.5c6-3.12,8.42-1.01,4.25,4c-27.13,32.62-23.76,58.5-1.52,62.88c18.07,3.56,37.63-16.38,35.63-56.51c-0.72-14.5-0.17-14.78,4.12-1.75c3.76,11.38,10.26,20.76,16.14,26.5"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/03072.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order & textbook quality verified"}
+  ],
+  [
+    "ま",
+    {"paths":["M29.83,32.28c2.2,1.15,4.43,1.5,7.14,1.26c11.54-1.04,25.94-3.12,34.66-4.85c2.87-0.57,5.45-0.44,7.13-0.44","M33.83,51.84c2.45,1.61,4.94,1.72,7.94,1.26c9.52-1.46,17.87-3.1,27.03-5.16c3.22-0.72,6.34-1.32,8.21-1.32","M55.81,14c1.52,1.8,1.8,4.57,1.8,7.19c0,2.63,0.46,43.88,0.46,54.25c0,21.3-30.07,19.96-30.07,9.86c0-10.79,25.88-9.93,38.57-3.18c6.12,3.25,11.55,6.38,14.8,9.13"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/0307e.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order & textbook quality verified"}
+  ],
+  [
+    "み",
+    {"paths":["M32.5,26c1.88,1.75,4.06,1.7,6.88,1.25c3.88-0.62,7.62-1.75,11.88-3.12c4.26-1.37,6.25-0.12,4.5,5.12c-1.75,5.24-6.66,17.39-12,30.12c-13.63,32.51-29.26,29.26-29.26,18.63c0-14.25,20.48-15.36,33-13.5c18.5,2.75,30,6.62,44.38,14.25","M79.38,54.75c0.75,2.38,0.49,4.37,0,6.25c-2.12,8.12-7.5,25-22.12,33.75"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/0307f.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order & textbook quality verified"}
+  ],
+  [
+    "ゆ",
+    {"paths":["M21.05,25.38c1.38,1.5,2.02,4.13,1.5,6.25c-2.88,11.75-4,22.25-2.12,35c2.5,16,6.5,14.5,9.5,0.5c8.5-22,23.5-36.5,40.13-36.5c16.88,0,21.88,11.38,21.88,20.25c0,27.38-30.88,29.62-43,16.75","M58.42,16.75c2.62,1.75,3.17,3.13,3.5,7.12c0.88,10.5,1.4,18.72,1.62,29.38c0.5,24-6.25,32-12.38,39.25"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/03086.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order verified; turnaround clearance widened for smooth tracing"}
+  ],
+  [
+    "わ",
+    {"paths":["M38.53,14.75c1.5,1.38,2.22,3.73,2,6.38c-1,11.87-2.75,44.49-2.75,52.87c0,8.38-0.62,16.62-0.62,19.5","M17.53,40.75c2.12,1.38,3.68,1.3,7.5,0c5.88-2,9.8-3.16,16.25-6c4.25-1.88,6.12,0,2.75,4c-6.72,7.96-13,16.5-22.12,27.88c-4.5,6.5-0.5,10.5,8,3c20-18,46-34.5,60-20c14.36,15.27,1.62,36.62-23.38,42.62"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/0308f.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order verified; hairpin clearance optimized"}
   ]
 ];});

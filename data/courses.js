@@ -29,7 +29,17 @@ else{root.MojitetsuData??={};root.MojitetsuData.courses=value;}
     "の",
     "あ",
     "え",
-    "お"
+    "お",
+    "き",
+    "け",
+    "さ",
+    "ち",
+    "は",
+    "ひ",
+    "ま",
+    "み",
+    "ゆ",
+    "わ"
   ],
   "kanji": [
     "一",
