@@ -1,18 +1,9 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const vm = require('node:vm');
+const data = require('../data/index.js');
 
 const ROOT = path.resolve(__dirname, '..');
-const DATA_PATH = path.join(ROOT, 'data.js');
 const OUTPUT_PATH = path.join(ROOT, 'sources.html');
-
-function loadData() {
-  const context = { window: {} };
-  vm.runInNewContext(fs.readFileSync(DATA_PATH, 'utf8'), context, {
-    filename: DATA_PATH,
-  });
-  return context.window.RAIL_DATA;
-}
 
 function escapeHtml(value) {
   return String(value)
@@ -92,6 +83,5 @@ ${data.cards.map(renderCard).join('\n')}
 `;
 }
 
-const data = loadData();
 fs.writeFileSync(OUTPUT_PATH, renderSources(data));
 console.log(`Generated ${path.relative(ROOT, OUTPUT_PATH)} (${data.cards.length} cards, ${Object.keys(data.characters).length} characters)`);

@@ -1,11 +1,13 @@
 /* Pure game state and stroke matcher. No network or DOM. */
-(function(root){
+(function(root,factory){
 'use strict';
-const GROUPS={
- hiragana:['や','せ','ふ','ほ','も','む','よ','い','つ','し','く','へ','り','こ','う','て','と','に','か','た','な','の'],
- kanji:['一','二','三','四','五','六','七','八','九','十','山','川','木','目','月','上','下']
-};
-const CHARS=[...GROUPS.hiragana,...GROUPS.kanji];
+const groups=typeof module!=='undefined'&&module.exports?require('./data/courses.js'):root.MojitetsuData?.courses;
+const api=factory(groups);
+if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.RailCore=api;
+})(globalThis,function(GROUPS){
+'use strict';
+if(!GROUPS)throw Error('コース定義を読み込めません');
+const CHARS=Object.values(GROUPS).flat();
 // The game checks stroke order and direction, not tracing precision. These
 // values are in the 109-unit character coordinate system, not screen pixels.
 const START_TOLERANCE=10,PATH_TOLERANCE=10,END_MARGIN=3;
@@ -49,5 +51,5 @@ const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 function candidates(paths,p,tolerance=START_TOLERANCE){const list=[];paths.forEach((points,index)=>{for(const reverse of [false,true]){const arr=reverse?points.slice().reverse():points;if(dist(arr[0],p)<=tolerance)list.push({index,reverse,points:arr,progress:0,error:dist(arr[0],p),steps:1,alive:true,reachedEnd:false});}});return list;}
 function advance(c,from,to,tolerance=PATH_TOLERANCE){if(!c.alive||c.reachedEnd)return;const n=Math.max(1,Math.ceil(dist(from,to)/1.5));for(let step=1;step<=n;step++){const p={x:from.x+(to.x-from.x)*step/n,y:from.y+(to.y-from.y)*step/n};let best=c.progress,d=Infinity;for(let i=Math.max(0,c.progress-4);i<=Math.min(c.points.length-1,c.progress+16);i++){const dd=dist(p,c.points[i]);if(dd<d){d=dd;best=i;}}if(d>tolerance||best<c.progress-3){c.alive=false;return;}c.progress=Math.max(c.progress,best);c.error+=d;c.steps++;if(c.progress>=c.points.length-END_MARGIN){c.reachedEnd=true;return;}}}
 function resolve(list,travel){if(travel<4)return null;const valid=list.filter(c=>c.alive&&c.progress>=Math.min(4,Math.floor(c.points.length*.2))).sort((a,b)=>a.error/a.steps-b.error/b.steps);if(valid.length===1)return valid[0];if(valid.length>1&&valid[1].error/valid[1].steps-valid[0].error/valid[0].steps>1.6)return valid[0];return null;}
-const api={CHARS,GROUPS,START_TOLERANCE,PATH_TOLERANCE,END_MARGIN,fresh,start,active,firstRecord,assist,uncertain,award,resetCards,discardActive,validate,dist,candidates,advance,resolve};if(typeof module!=='undefined')module.exports=api;else root.RailCore=api;
-})(globalThis);
+return{CHARS,GROUPS,START_TOLERANCE,PATH_TOLERANCE,END_MARGIN,fresh,start,active,firstRecord,assist,uncertain,award,resetCards,discardActive,validate,dist,candidates,advance,resolve};
+});
