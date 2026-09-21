@@ -48,6 +48,11 @@ else{root.MojitetsuData??={};root.MojitetsuData.courses=value;}
     "目",
     "月",
     "上",
-    "下"
+    "下",
+    "日",
+    "口",
+    "円",
+    "力",
+    "大"
   ]
 };});
