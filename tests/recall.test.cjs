@@ -1,0 +1,23 @@
+const assert=require('node:assert/strict');
+const C=require('../core.js'),D=require('../data/index.js');
+const counts=Object.fromEntries(Object.entries(D.characters).map(([k,v])=>[k,v.paths.length]));
+const line=Array.from({length:61},(_,i)=>({x:20+i,y:30}));
+const shifted=line.map(p=>({x:p.x+8,y:p.y+8}));
+assert.equal(C.recallMatch([line],shifted)?.index,0);
+assert.equal(C.recallMatch([line],line.slice().reverse())?.reverse,true);
+assert.equal(C.recallMatch([line],line.map(p=>({x:p.x,y:p.y+15}))),null);
+assert.equal(C.recallMatch([line],[line[0],line[0]]),null);
+assert.equal(C.recallMatch([line],line.slice(0,20)),null);
+const curve=Array.from({length:81},(_,i)=>({x:55+30*Math.cos(Math.PI*i/80),y:30+30*Math.sin(Math.PI*i/80)}));
+assert.equal(C.recallMatch([curve],[curve[0],curve.at(-1)]),null,'no curved shortcuts');
+const bend=[...Array.from({length:41},(_,i)=>({x:25+i,y:20})),...Array.from({length:51},(_,i)=>({x:65,y:20+i}))];
+assert.equal(C.recallMatch([bend],[bend[0],bend.at(-1)]),null,'no bent shortcuts');
+assert.equal(C.recallMatch([line],[...line,{x:95,y:10}])?.index,0,'post-end flick retained');
+assert.equal(C.recallMatch([line],[...line,{x:80,y:100},{x:20,y:100}]),null,'do not join multiple strokes after endpoint');
+const other=line.map(p=>({x:p.x,y:p.y+35}));assert.equal(C.recallMatch([line,other],other)?.index,1,'no expected-stroke bias');
+assert.equal(C.recallMatch([line,line],line),null,'identical candidates remain uncertain');
+const state=C.fresh(),s=C.start(state,'kanji');s.writingMode='recall';const q=s.questions[0];q.recallUsed=true;q.stroke=1;q.complete=true;q.ink=[shifted];
+assert.deepEqual(C.validate(JSON.parse(JSON.stringify(state)),counts).sessions[0].questions[0].ink,[shifted]);
+for(const mutate of [x=>x.sessions[0].writingMode='bad',x=>x.sessions[0].questions[0].ink[0][0].x=Infinity,x=>x.sessions[0].questions[0].ink[0]=Array(129).fill({x:1,y:1}),x=>x.sessions[0].questions[0].ink=[],x=>x.sessions[0].questions[0].recallUsed='yes']){const x=structuredClone(state);mutate(x);assert.throws(()=>C.validate(x,counts));}
+C.resetCards(state);assert.equal(C.active(state).questions[0].ink.length,1,'card reset retains active ink');
+console.log('PASS recall tolerances, direction, bends, ambiguity, endpoint flick, bounded ink validation and reset');

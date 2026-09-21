@@ -40,9 +40,9 @@ function validate(x,counts){
  x.shinyCards??=[];check(Array.isArray(x.shinyCards)&&x.shinyCards.length<=x.cards.length&&unique(x.shinyCards)&&x.shinyCards.every(id=>str(id)&&x.cards.includes(id)),'キラカードの記録が不正です');
  check(Array.isArray(x.sessions)&&x.sessions.length<=100&&unique(x.sessions.map(s=>s.id)),'履歴が不正です');
  check(x.activeId===null||str(x.activeId),'再開情報が不正です');
- for(const s of x.sessions){check((s.course===undefined||Object.hasOwn(GROUPS,s.course))&&(s.guide===undefined||typeof s.guide==='boolean')&&str(s.id)&&str(s.createdAt)&&Number.isFinite(Date.parse(s.createdAt))&&integer(s.index,5)&&typeof s.repeat==='boolean'&&(s.shinyAwarded===undefined||typeof s.shinyAwarded==='boolean')&&(s.orderMistake===undefined||typeof s.orderMistake==='boolean')&&(s.reward===null||str(s.reward)),'セッションが不正です');check(Array.isArray(s.questions)&&s.questions.length===5,'出題数が不正です');if(s.shinyAwarded)check(s.repeat&&s.reward!==null&&cleanOrder(s),'キラ獲得記録が不正です');
+ for(const s of x.sessions){check((s.course===undefined||Object.hasOwn(GROUPS,s.course))&&(s.guide===undefined||typeof s.guide==='boolean')&&str(s.id)&&str(s.createdAt)&&Number.isFinite(Date.parse(s.createdAt))&&integer(s.index,5)&&typeof s.repeat==='boolean'&&(s.shinyAwarded===undefined||typeof s.shinyAwarded==='boolean')&&(s.orderMistake===undefined||typeof s.orderMistake==='boolean')&&(s.reward===null||str(s.reward)),'セッションが不正です');check(s.writingMode===undefined||['trace','recall'].includes(s.writingMode),'練習モードが不正です');check(Array.isArray(s.questions)&&s.questions.length===5,'出題数が不正です');if(s.shinyAwarded)check(s.repeat&&s.reward!==null&&cleanOrder(s),'キラ獲得記録が不正です');
   for(let qi=0;qi<5;qi++){const q=s.questions[qi];check(str(q.char)&&integer(q.stroke,8)&&typeof q.complete==='boolean'&&typeof q.assisted==='boolean'&&typeof q.uncertain==='boolean'&&(q.startedAt===null||str(q.startedAt)),'文字記録が不正です');check(q.records&&typeof q.records==='object'&&!Array.isArray(q.records)&&Object.keys(q.records).length<=8,'画の記録が不正です');
-   const n=counts[q.char];if(n)check(q.stroke<=n&&q.complete===(q.stroke===n),'画数が一致しません');else check(s.id!==x.activeId||!!s.reward,'再開中に未対応の文字があります');
+   check(q.recallUsed===undefined||typeof q.recallUsed==='boolean','想起記録が不正です');if(q.ink!==undefined)check(s.id===x.activeId&&qi===s.index&&Array.isArray(q.ink)&&q.ink.length===q.stroke&&q.ink.every(line=>Array.isArray(line)&&line.length>=2&&line.length<=128&&line.every(p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.x>=-40&&p.x<=149&&p.y>=-40&&p.y<=149)),'途中の筆跡が不正です');const n=counts[q.char];if(n)check(q.stroke<=n&&q.complete===(q.stroke===n),'画数が一致しません');else check(s.id!==x.activeId||!!s.reward,'再開中に未対応の文字があります');
    for(const [k,r]of Object.entries(q.records)){check(/^[0-7]$/.test(k)&&r&&r.expected===+k&&(r.observed===null||integer(r.observed,7))&&['correct','order','direction','uncertain','unobserved'].includes(r.kind)&&typeof r.assisted==='boolean'&&['forward','reverse',null].includes(r.direction)&&str(r.at)&&str(r.engine),'画の記録形式が不正です');if(n)check(+k<n&&(r.observed===null||r.observed<n),'記録の画番号が不正です');for(const opt of ['reason','interrupted','help'])check(r[opt]===undefined||r[opt]===null||str(r[opt]),'補助記録が不正です');}
    if(qi<s.index)check(q.complete,'途中の文字が未完了です');if(qi>s.index)check(!q.complete&&q.stroke===0,'出題位置が不正です');
   }
@@ -57,5 +57,43 @@ function resolve(list,travel){if(travel<4)return null;const valid=list.filter(c=
 // A recognizably wrong start counts even when the finger derails before resolve()
 // can choose a full trace. A start shared with the correct stroke stays uncertain.
 function wrongChoice(list,expected,travel){if(travel<4)return null;const correct=c=>c.index===expected&&!c.reverse,started=list.filter(c=>!correct(c));if(!started.length)return null;const valid=list.filter(c=>c.alive&&c.progress>=Math.min(4,Math.floor(c.points.length*.2)));if(valid.some(correct))return null;if(valid.length)return valid.filter(c=>!correct(c)).sort((a,b)=>a.error/a.steps-b.error/b.steps)[0]||null;return list.some(correct)?null:started.sort((a,b)=>a.error/a.steps-b.error/b.steps)[0];}
-return{CHARS,GROUPS,START_TOLERANCE,PATH_TOLERANCE,END_MARGIN,fresh,start,active,firstRecord,recordMistake,assist,uncertain,award,resetCards,discardActive,validate,dist,candidates,advance,resolve,wrongChoice};
+// Recall is matched on release. Bounded shifts, size and tilt compensate for
+// memory writing; the original monotone path matcher still checks every bend.
+function recallMatch(paths,input){
+ if(input.length<2)return null;
+ const travel=input.slice(1).reduce((n,p,i)=>n+dist(input[i],p),0);
+ if(travel<4)return null;
+ const matches=[];
+ paths.forEach((path,index)=>{for(const reverse of [false,true]){
+  const source=reverse?path.slice().reverse():path,origin=source[0],shift=dist(origin,input[0]);
+  if(shift>14)continue;
+  let best=null;
+  const end=source.at(-1),last=input.at(-1),chord=dist(origin,end);
+  let tilt=(Math.atan2(last.y-input[0].y,last.x-input[0].x)-Math.atan2(end.y-origin.y,end.x-origin.x))*180/Math.PI;
+  tilt=((tilt+540)%360)-180;
+  const size=chord>1?dist(input[0],last)/chord:1;
+  const scales=[.85,1,1.15],angles=[-10,0,10];
+  if(size>=.8&&size<=1.2)scales.push(size);
+  if(Math.abs(tilt)<=12)angles.push(tilt);
+  for(const scale of scales)for(const degrees of angles){
+   const angle=degrees*Math.PI/180,cos=Math.cos(angle),sin=Math.sin(angle);
+   const points=source.map(p=>({x:input[0].x+scale*((p.x-origin.x)*cos-(p.y-origin.y)*sin),y:input[0].y+scale*((p.x-origin.x)*sin+(p.y-origin.y)*cos)}));
+   const c=candidates([points],input[0],.01).find(c=>!c.reverse);
+   let next=1;
+   for(;next<input.length&&c.alive&&!c.reachedEnd;next++)advance(c,input[next-1],input[next],6);
+   if(!c.alive||!c.reachedEnd)continue;
+   // A short finishing flick is fine; drawing another stroke without lifting is not.
+   let tail=dist(points.at(-1),input[next-1]);
+   for(let i=next;i<input.length;i++)tail+=dist(input[i-1],input[i]);
+   if(tail>32)continue;
+   const score=c.error/c.steps+shift*.65+Math.abs(scale-1)*5+Math.abs(degrees)*.04;
+   if(!best||score<best.score)best={index,reverse,score};
+  }
+  if(best)matches.push(best);
+ }});
+ matches.sort((a,b)=>a.score-b.score);
+ // Never choose a stroke merely because it is the expected one.
+ return matches.length&&(!matches[1]||matches[1].score-matches[0].score>1)?matches[0]:null;
+}
+return{recallMatch,CHARS,GROUPS,START_TOLERANCE,PATH_TOLERANCE,END_MARGIN,fresh,start,active,firstRecord,recordMistake,assist,uncertain,award,resetCards,discardActive,validate,dist,candidates,advance,resolve,wrongChoice};
 });
