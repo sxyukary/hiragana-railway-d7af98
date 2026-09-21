@@ -38,7 +38,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
     "ふ",
     {
       "paths": [
-        "M42.63,15.62c3.62,3.38,7.5,5.38,12.74,6.13c9.59,1.37,3.5,3.38-1.88,6.12",
+        "M42.5,15.5c3.5,2.5,7.5,6.0,11.5,10.5",
         "M43.63,46.88c1.88,4.62,7.5,9.41,14.25,17.5c10.62,12.74,0.49,30-19.13,21.62",
         "M16.5,73.38c0.75,4,1.88,8.12,5,10.12c1.16,0.74,0.12-3.38,13.25-9.12",
         "M80.13,61.88c5.12,3.38,10.28,7.49,11.38,8.88c6.75,8.5-0.25,4.62-4.62,7.12"
@@ -47,7 +47,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
       "viewBox": "0 0 109 109",
       "license": "CC BY-SA 3.0",
       "author": "Ulrich Apel",
-      "review": "source-order verified; iPad tolerance pending"
+      "review": "source-order verified; textbook dot adjusted"
     }
   ],
   [
@@ -208,14 +208,14 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
     "う",
     {
       "paths": [
-        "M42,15.5c5.62,2.12,9.62,3,12.88,3c8.27,0,8,1.12-0.38,5.5",
+        "M42,15c3.5,2.5,8,5.5,13.5,8.5",
         "M33,42.38c2.12,1.12,4.12,2.88,8.5,1.38c4.38-1.5,12.75-7.12,18.5-7c5.75,0.12,10.25,5,10.25,18c0,15.49-8.25,30.24-24.37,41.24"
       ],
       "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03046.svg",
       "viewBox": "0 0 109 109",
       "license": "CC BY-SA 3.0",
       "author": "Ulrich Apel",
-      "review": "source-order verified; iPad tolerance pending"
+      "review": "source-order verified; textbook dot adjusted"
     }
   ],
   [
@@ -314,6 +314,50 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
         "M53.82,28.62c1,1.5,1.34,4.12,0.88,6.62c-1.75,9.5-6.89,25-10.75,33.12c-9.63,20.26-16.55,14.74-24.38-1.98c-9.13-19.5,23.5-48.88,50.63-40.38c32.38,10.15,28,54.62-4.75,60.88"
       ],
       "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0306e.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    }
+  ],
+  [
+    "あ",
+    {
+      "paths": [
+        "M31.01,33c0.88,0.88,2.75,1.82,5.25,1.75c8.62-0.25,20-2.12,29.5-4.25c1.51-0.34,4.62-0.88,6.62-0.5",
+        "M49.76,17.62c0.88,1,1.82,3.26,1.38,5.25c-3.75,16.75-6.25,38.13-5.13,53.63c0.41,5.7,1.88,10.88,3.38,13.62",
+        "M65.63,44.12c0.75,1.12,1.16,4.39,0.5,6.12c-4.62,12.26-11.24,23.76-25.37,35.76c-6.86,5.83-15.88,3.75-16.25-8.38c-0.34-10.87,13.38-23.12,32.38-26.74c12.42-2.37,27,1.38,30.5,12.75c4.05,13.18-3.76,26.37-20.88,30.49"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03042.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; iPad tolerance pending"
+    }
+  ],
+  [
+    "え",
+    {
+      "paths": [
+        "M42,14c3.5,2.5,8,5.5,13.5,8.5",
+        "M32.52,45.12c1.88,1.25,4.5,1.75,7.38,0.62c3.29-1.29,17-7.88,21.25-9.88c4.25-2,8.32,0.04,4.38,4.62c-12.26,14.27-27.26,31.52-39.51,44.4c-1.5,3.0,1.2,4.5,4.5,2.5c12.0-8.0,18.0-16.0,23.62-18.5c7.13,0,3.5,16.75,6.75,22.38c3.25,5.63,19.12,3.75,26.12,2.12"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/03048.svg",
+      "viewBox": "0 0 109 109",
+      "license": "CC BY-SA 3.0",
+      "author": "Ulrich Apel",
+      "review": "source-order verified; textbook dot & hairpin clearance adjusted"
+    }
+  ],
+  [
+    "お",
+    {
+      "paths": [
+        "M22.88,35.12c1.38,1,3.62,2.38,6,2.12c2.38-0.26,19.62-5.12,21.12-5.74c1.5-0.62,4-1.25,5.88-2",
+        "M41.5,16.12c2.25,1,3.59,4.39,3.12,7.38c-2.5,16.12-3.37,45.53-2.25,58.38c0.75,8.62-0.64,10.45-7.12,7.12c-5.13-2.62-13.75-8-13.75-12.38c0-7.5,24.38-23.62,44.75-23.62c17.25,0,25,8.25,25,17.25c0,8.25-9.38,18.88-26.75,21",
+        "M73,22.12c5.38,2.62,8.88,5.88,10.62,8.25c2.27,3.08,0.38,4.5-1.12,5"
+      ],
+      "source": "https://github.com/KanjiVG/kanjivg/blob/master/kanji/0304a.svg",
       "viewBox": "0 0 109 109",
       "license": "CC BY-SA 3.0",
       "author": "Ulrich Apel",

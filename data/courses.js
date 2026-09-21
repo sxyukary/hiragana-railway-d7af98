@@ -26,7 +26,10 @@ else{root.MojitetsuData??={};root.MojitetsuData.courses=value;}
     "か",
     "た",
     "な",
-    "の"
+    "の",
+    "あ",
+    "え",
+    "お"
   ],
   "kanji": [
     "一",
