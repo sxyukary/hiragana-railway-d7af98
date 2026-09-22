@@ -45,3 +45,6 @@ textarea{font:inherit}.panel hr{border:0;border-top:1px solid var(--line);margin
 #written .stroke{stroke:#26766a;stroke-width:2.8}
 @keyframes recall-open{from{background:#fff0be}to{background:#fffefa}}
 @media(max-width:450px){#writing-modes button{font-size:14px;padding:8px 12px}.play-top{gap:8px}#stations{gap:5px}#stations span{width:18px}}
+
+/* Keep the resume choice readable on iPad's two-button layout. */
+.play-actions #restart{white-space:nowrap;padding-left:16px;padding-right:16px;font-size:20px}
