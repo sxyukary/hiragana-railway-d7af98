@@ -48,22 +48,22 @@ for(const type of ['dblclick','gesturestart'])document.addEventListener(type,e=>
 $('hint').onclick=()=>{if(blocked)return;if(isRecall()){peekRecall();return;}pause('ヒント選択');help();};
 $('demo').onclick=()=>{if(blocked||isRecall()||q()?.complete)return;pause('お手本選択');help('お手本');demoing=true;$('demo').disabled=true;const token=animationToken,item=q(),path=paths[item.stroke],len=path.getTotalLength(),duration=Math.max(800,len*13),start=performance.now();message('この せんを みていてね');function step(now){if(token!==animationToken)return;const f=Math.min(1,(now-start)/duration);$('trail').setAttribute('d',path.getAttribute('d'));$('trail').style.strokeDasharray=len;$('trail').style.strokeDashoffset=len*(1-f);const p=path.getPointAtLength(len*f);$('demo-dot').hidden=false;$('demo-dot').setAttribute('cx',p.x);$('demo-dot').setAttribute('cy',p.y);if(f<1)animation=requestAnimationFrame(step);else{cancelDemo();clearTrail();render();message('まるから かいてみよう');}}animation=requestAnimationFrame(step);};
 $('next').onclick=()=>{if(blocked||!q()?.complete)return;const s=session();delete q().ink;s.index++;if(s.index===5){C.award(state,D.cards.map(c=>c.id));persist();showReward();}else{persist();loadQuestion();}};
-function isRecall(){return courseOf(session())==='kanji'&&session()?.writingMode==='recall';}
+function isRecall(){return session()?.writingMode==='recall';}
 function inkPath(points){return points.map((p,i)=>(i?'L':'M')+p.x+' '+p.y).join(' ');}
 function cancelRecall(){clearTimeout(recallTimer);recallTimer=0;if(recallPhase!=='off'){recallPhase='suspended';$('game').dataset.recall='suspended';$('recall-countdown').hidden=true;}}
 function renderRecall(){
  const item=q(),recall=isRecall();
- $('writing-modes').hidden=courseOf(session())!=='kanji';
+ $('writing-modes').hidden=false;
  $('mode-trace').setAttribute('aria-pressed',String(!recall));$('mode-recall').setAttribute('aria-pressed',String(recall));
  $('mode-trace').disabled=$('mode-recall').disabled=!!item.complete;
  $('recall-grid').toggleAttribute('hidden',!recall);$('demo').hidden=recall;$('hint').textContent=recall?'💡 ヒント':'ヒント';
  $('written').replaceChildren();
  if(!recall){recallPhase='off';delete $('game').dataset.recall;$('recall-countdown').hidden=true;return;}
  $('game').dataset.recall=recallPhase;
- const character=D.characters[item.char],show=recallPhase==='preview'||item.complete;
- $('char-label').textContent=show?'「'+item.char+'」 '+character.reading:character.reading;
- $('board').setAttribute('aria-label',character.reading+'を おぼえて書くところ');
- $('speak').setAttribute('aria-label',character.reading+'の おとをきく');
+ const character=D.characters[item.char],reading=character.reading||item.char,show=recallPhase==='preview'||item.complete;
+ $('char-label').textContent=show?'「'+item.char+'」'+(character.reading?' '+reading:''):reading;
+ $('board').setAttribute('aria-label',reading+'を おぼえて書くところ');
+ $('speak').setAttribute('aria-label',reading+'の おとをきく');
  $('hint').disabled=item.complete||!['writing','hint'].includes(recallPhase);
  $('recall-countdown').hidden=recallPhase!=='preview';$('recall-countdown').textContent=recallRemaining;
  for(const line of item.ink||[])$('written').append(svgEl('path',{d:inkPath(line),class:'stroke'}));
@@ -84,7 +84,7 @@ function peekRecall(){
  recallTimer=setTimeout(()=>{if(blocked||!isRecall()||currentScreen!=='game')return;recallPhase='writing';render();message('おもいだして かいてみよう');},1000);
 }
 function endRecall(e,cancel){
- const p=pointer,item=q(),chosen=cancel?null:C.recallMatch(samples,p.points);clearTrail();
+ const p=pointer,item=q(),chosen=cancel?null:C.recallMatch(samples,p.points,courseOf(session())==='hiragana');clearTrail();
  if(chosen&&chosen.index===item.stroke&&!chosen.reverse){
   C.firstRecord(item,'correct',item.stroke,'forward');item.ink??=[];
   // Keep only the current question's bounded ink for interruption/backup.
@@ -98,7 +98,7 @@ function endRecall(e,cancel){
  }
 }
 function setWritingMode(mode){
- if(blocked||courseOf(session())!=='kanji'||q()?.complete||session().writingMode===mode)return;
+ if(blocked||!session()||q()?.complete||session().writingMode===mode)return;
  pause('かきかた切り替え');const item=q();
  if(item.stroke>0||item.recallUsed)C.assist(item,'かきかた切り替え');
  if(mode==='recall'&&!item.ink)item.ink=samples.slice(0,item.stroke).map(line=>Array.from({length:Math.min(128,line.length)},(_,i)=>line[Math.round(i*(line.length-1)/(Math.min(128,line.length)-1))]));

@@ -58,8 +58,27 @@ function resolve(list,travel){if(travel<4)return null;const valid=list.filter(c=
 // can choose a full trace. A start shared with the correct stroke stays uncertain.
 function wrongChoice(list,expected,travel){if(travel<4)return null;const correct=c=>c.index===expected&&!c.reverse,started=list.filter(c=>!correct(c));if(!started.length)return null;const valid=list.filter(c=>c.alive&&c.progress>=Math.min(4,Math.floor(c.points.length*.2)));if(valid.some(correct))return null;if(valid.length)return valid.filter(c=>!correct(c)).sort((a,b)=>a.error/a.steps-b.error/b.steps)[0]||null;return list.some(correct)?null:started.sort((a,b)=>a.error/a.steps-b.error/b.steps)[0];}
 // Recall is matched on release. Bounded shifts, size and tilt compensate for
-// memory writing; the original monotone path matcher still checks every bend.
-function recallMatch(paths,input){
+// memory writing. Keep multiple ordered positions when a path folds over itself.
+function recallFollow(points,input){
+ const path=points.filter((_,i)=>i%2===0||i===points.length-1),drawn=[input[0]];
+ for(let i=1;i<input.length;i++){const a=input[i-1],b=input[i],n=Math.max(1,Math.ceil(dist(a,b)/2.5));for(let j=1;j<=n;j++)drawn.push({x:a.x+(b.x-a.x)*j/n,y:a.y+(b.y-a.y)*j/n});}
+ if(drawn.length>400){const step=Math.ceil(drawn.length/400);const sampled=drawn.filter((_,i)=>i%step===0);if(sampled.at(-1)!==drawn.at(-1))sampled.push(drawn.at(-1));drawn.splice(0,drawn.length,...sampled);}
+ let states=new Float64Array(path.length).fill(Infinity);states[0]=dist(path[0],drawn[0]);
+ let best=Infinity;
+ const tail=Array(drawn.length).fill(0);for(let i=drawn.length-2;i>=0;i--)tail[i]=tail[i+1]+dist(drawn[i],drawn[i+1]);
+ for(let i=1;i<drawn.length;i++){
+  const next=new Float64Array(path.length).fill(Infinity);
+  for(let j=0;j<path.length;j++)if(Number.isFinite(states[j]))for(let k=j;k<=Math.min(j+3,path.length-1);k++){
+   const d=dist(path[k],drawn[i]);if(d>10)continue;
+   const score=states[j]+d+(k===j?0.1:0);
+   if(score<next[k])next[k]=score;
+  }
+  states=next;
+  if(tail[i]<=32)for(let j=Math.max(0,path.length-3);j<path.length;j++)best=Math.min(best,states[j]);
+ }
+ return Number.isFinite(best)?best/drawn.length:null;
+}
+function recallMatch(paths,input,relaxed=false){
  if(input.length<2)return null;
  const travel=input.slice(1).reduce((n,p,i)=>n+dist(input[i],p),0);
  if(travel<4)return null;
@@ -67,6 +86,7 @@ function recallMatch(paths,input){
  paths.forEach((path,index)=>{for(const reverse of [false,true]){
   const source=reverse?path.slice().reverse():path,origin=source[0],shift=dist(origin,input[0]);
   if(shift>14)continue;
+  if(relaxed&&travel>source.length*8+80)continue;
   let best=null;
   const end=source.at(-1),last=input.at(-1),chord=dist(origin,end);
   let tilt=(Math.atan2(last.y-input[0].y,last.x-input[0].x)-Math.atan2(end.y-origin.y,end.x-origin.x))*180/Math.PI;
@@ -78,15 +98,20 @@ function recallMatch(paths,input){
   for(const scale of scales)for(const degrees of angles){
    const angle=degrees*Math.PI/180,cos=Math.cos(angle),sin=Math.sin(angle);
    const points=source.map(p=>({x:input[0].x+scale*((p.x-origin.x)*cos-(p.y-origin.y)*sin),y:input[0].y+scale*((p.x-origin.x)*sin+(p.y-origin.y)*cos)}));
-   const c=candidates([points],input[0],.01).find(c=>!c.reverse);
-   let next=1;
-   for(;next<input.length&&c.alive&&!c.reachedEnd;next++)advance(c,input[next-1],input[next],6);
-   if(!c.alive||!c.reachedEnd)continue;
-   // A short finishing flick is fine; drawing another stroke without lifting is not.
-   let tail=dist(points.at(-1),input[next-1]);
-   for(let i=next;i<input.length;i++)tail+=dist(input[i-1],input[i]);
-   if(tail>32)continue;
-   const score=c.error/c.steps+shift*.65+Math.abs(scale-1)*5+Math.abs(degrees)*.04;
+   let error;
+   if(relaxed)error=recallFollow(points,input);
+   else{
+    const c=candidates([points],input[0],.01).find(c=>!c.reverse);
+    let next=1;
+    for(;next<input.length&&c.alive&&!c.reachedEnd;next++)advance(c,input[next-1],input[next],6);
+    if(!c.alive||!c.reachedEnd)continue;
+    let tail=dist(points.at(-1),input[next-1]);
+    for(let i=next;i<input.length;i++)tail+=dist(input[i-1],input[i]);
+    if(tail>32)continue;
+    error=c.error/c.steps;
+   }
+   if(error===null)continue;
+   const score=error+shift*.65+Math.abs(scale-1)*5+Math.abs(degrees)*.04;
    if(!best||score<best.score)best={index,reverse,score};
   }
   if(best)matches.push(best);

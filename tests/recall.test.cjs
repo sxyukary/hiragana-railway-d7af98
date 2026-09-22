@@ -12,6 +12,12 @@ const curve=Array.from({length:81},(_,i)=>({x:55+30*Math.cos(Math.PI*i/80),y:30+
 assert.equal(C.recallMatch([curve],[curve[0],curve.at(-1)]),null,'no curved shortcuts');
 const bend=[...Array.from({length:41},(_,i)=>({x:25+i,y:20})),...Array.from({length:51},(_,i)=>({x:65,y:20+i}))];
 assert.equal(C.recallMatch([bend],[bend[0],bend.at(-1)]),null,'no bent shortcuts');
+const fold=[...Array.from({length:61},(_,i)=>({x:20+i,y:20})),...Array.from({length:41},(_,i)=>({x:80-i,y:20})),...Array.from({length:61},(_,i)=>({x:40,y:20+i}))];
+const foldedInk=fold.map((p,i)=>({x:p.x+Math.sin(i*1.7)*2,y:p.y+Math.cos(i*1.3)*2}));
+assert.equal(C.recallMatch([fold],foldedInk),null,'strict recall matcher is unchanged');
+assert.equal(C.recallMatch([fold],foldedInk,true)?.reverse,false,'ordered retracing with finger wobble passes');
+assert.equal(C.recallMatch([fold],foldedInk.slice().reverse(),true)?.reverse,true,'full reversal remains distinguishable');
+assert.equal(C.recallMatch([fold],[fold[0],fold.at(-1)],true),null,'retraced bend cannot be skipped');
 assert.equal(C.recallMatch([line],[...line,{x:95,y:10}])?.index,0,'post-end flick retained');
 assert.equal(C.recallMatch([line],[...line,{x:80,y:100},{x:20,y:100}]),null,'do not join multiple strokes after endpoint');
 const other=line.map(p=>({x:p.x,y:p.y+35}));assert.equal(C.recallMatch([line,other],other)?.index,1,'no expected-stroke bias');
