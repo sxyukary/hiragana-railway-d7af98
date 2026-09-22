@@ -411,5 +411,17 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "わ",
     {"paths":["M38.53,14.75c1.5,1.38,2.22,3.73,2,6.38c-1,11.87-2.75,44.49-2.75,52.87c0,8.38-0.62,16.62-0.62,19.5","M17.53,40.75c2.12,1.38,3.68,1.3,7.5,0c5.88-2,9.8-3.16,16.25-6c4.25-1.88,6.12,0,2.75,4c-6.72,7.96-13,16.5-22.12,27.88c-4.5,6.5-0.5,10.5,8,3c20-18,46-34.5,60-20c14.36,15.27,1.62,36.62-23.38,42.62"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/0308f.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order verified; hairpin clearance optimized"}
+  ],
+  [
+    "ら",
+    {"paths":["M39,16c3.5,2.5,8,5.0,13.5,7.5","M35.83,35.75c-2.14,4.34-2.79,8.67-3.11,13.24c-0.42,5.84-0.31,12.05-2.14,19.13c-3.16,12.27,1.49,4.77,3,3.5c11.88-10,21.7-12.67,32.61-12.49c9.21,0.15,16.85,5.19,16.76,13.88c-0.12,13.6-14.24,21.49-32.49,22.49"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/03089.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order verified; textbook dot adjusted"}
+  ],
+  [
+    "る",
+    {"paths":["M34.31,20.38c1.75,1.25,4.62,2.62,8.5,1.5c3.88-1.12,9.62-2.5,15.62-4.62c6-2.12,7.5-0.12,4.38,4.25c-3.12,4.37-18.89,24.62-27.75,34c-5.5,6.5-1.5,11,7,4c13-7,38.5-8.5,38.25,12.63c0,22.5-40.88,24.5-40.88,12.62c0-11.25,18.12-8.75,24.38-0.38"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/0308b.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order verified; hairpin clearance optimized"}
+  ],
+  [
+    "れ",
+    {"paths":["M34.48,13c1.5,1.38,2.83,3.74,2.5,6.38c-0.5,4-2.75,44.5-2.75,52.88c0,8.38,0.12,16.62,0.12,19.5","M16.98,40.75c2.12,1.38,3.74,1.46,7.5,0c4.5-1.75,6.55-2.66,13-5.5c4.25-1.88,4.4,0.24,2.5,3.5c-5.25,9-10.5,16.75-18.88,27.62c-5.5,7.5-1.5,11.5,6.5,4c12.5-11.5,18.5-17.5,30.63-33.38c6.38-6,19.39-12.09,18.14,0.88c-1.02,10.63-1.89,22.13-2.29,30.75c-1.02,21.71,11.53,18,20.15,8.63"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/0308c.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order verified; hairpin clearance optimized"}
   ]
 ];});

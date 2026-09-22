@@ -39,7 +39,10 @@ else{root.MojitetsuData??={};root.MojitetsuData.courses=value;}
     "ま",
     "み",
     "ゆ",
-    "わ"
+    "わ",
+    "ら",
+    "る",
+    "れ"
   ],
   "kanji": [
     "一",
