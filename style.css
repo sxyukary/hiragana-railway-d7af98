@@ -54,10 +54,10 @@ body.home-screen .topbar{display:none}
 .hero-photo{position:relative;flex:none;height:clamp(220px,min(38vh,62vw),420px);margin:0 calc(50% - 50vw);overflow:hidden;background:#1f3336}
 #hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;animation:hero-pan 18s ease-in-out infinite alternate}
 @keyframes hero-pan{from{transform:scale(1.08) translateX(2%)}to{transform:scale(1.08) translateX(-2%)}}
-.hero-scrim{position:absolute;inset:0;background:linear-gradient(#0a161a8c,#0a161a00 32%,#0a161a00 58%,#0a161a99)}
+.hero-scrim{position:absolute;inset:0;background:linear-gradient(#0a161a00 55%,#0a161a99)}
 .hero-top{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:calc(env(safe-area-inset-top) + 16px) max(28px,calc(50vw - 480px)) 0}
-.hero-brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:19px;font-weight:800;letter-spacing:.06em;text-shadow:0 1px 6px #0008}
-.hero-brand img{width:38px;height:38px;border-radius:10px;box-shadow:0 2px 8px #0006}
+.hero-brand{display:flex;align-items:center;gap:10px;padding:5px 16px 5px 5px;border-radius:999px;background:#10202473;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-size:18px;font-weight:800;letter-spacing:.06em;box-shadow:0 4px 14px #0000002e}
+.hero-brand img{width:34px;height:34px;border-radius:50%}
 .hero-caption{position:absolute;left:max(28px,calc(50vw - 480px));bottom:78px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;color:#fff}
 .hero-tag{padding:4px 10px;border-radius:999px;background:var(--accent);font-size:12px;font-weight:800;letter-spacing:.1em}
 .hero-name{font-size:26px;font-weight:800;text-shadow:0 2px 8px #00000080}
@@ -112,7 +112,7 @@ body.home-screen .topbar{display:none}
 #home .home-bottom{margin-top:auto;padding:10px 0 6px}
 .tactile-strip{flex:none;height:46px;margin:0 calc(50% - 50vw);border-top:6px solid #fff;background-color:#f0c132;background-image:radial-gradient(circle,#d6a516 3px,transparent 3.6px);background-size:16px 16px}
 @media(max-width:700px){.hero-top{padding-left:16px;padding-right:16px}
-.hero-brand{font-size:0;gap:0}
+.hero-brand{font-size:0;gap:0;padding:4px}
 .hero-caption{left:16px;bottom:62px}
 .hero-name{font-size:19px}
 .departure-board{gap:8px;padding:8px 12px}
