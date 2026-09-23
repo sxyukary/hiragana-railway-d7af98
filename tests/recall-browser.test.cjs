@@ -21,7 +21,7 @@ const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='moji
    }
   }return{failures,strokes};});
  assert.deepEqual(results.failures,[]);console.log('PASS all kanji and hiragana strokes, including sparse and perturbed hiragana retracing:',results.strokes);
- await page.evaluate(key=>{const state=RailCore.fresh();state.settings.pool=['木'];localStorage.setItem(key,JSON.stringify(state));},KEY);await page.reload();await page.locator('#play').click();await page.locator('#course-kanji').click();await page.locator('#mode-recall').click();
+ await page.evaluate(key=>{const state=RailCore.fresh();state.settings.pool=['木'];localStorage.setItem(key,JSON.stringify(state));},KEY);await page.reload();await page.locator('#lines [data-course="kanji"]').click();await page.locator('#mode-recall').click();
  assert.equal(await page.locator('#game').getAttribute('data-recall'),'preview');assert.equal(await page.locator('#recall-countdown').textContent(),'3');
  async function points(i,offset=0){return page.locator('#strokes path').nth(i).evaluate((p,offset)=>{const len=p.getTotalLength(),n=Math.ceil(len/2),m=p.getScreenCTM();return Array.from({length:n+1},(_,i)=>{const v=p.getPointAtLength(i*len/n),r=new DOMPoint(v.x+offset,v.y+offset).matrixTransform(m);return{x:r.x,y:r.y};});},offset);}
  async function draw(i,{offset=0,reverse=false,lift=true}={}){let ps=await points(i,offset);if(reverse)ps.reverse();await page.mouse.move(ps[0].x,ps[0].y);await page.mouse.down();for(const p of ps.slice(1))await page.mouse.move(p.x,p.y);if(lift)await page.mouse.up();}
@@ -58,7 +58,7 @@ const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='moji
  assert.equal(await page.locator('#reward').isVisible(),true);
  const completed=await saved();assert.equal(completed.cards.length,1);assert.ok(completed.sessions[0].questions.every(q=>q.complete&&q.ink===undefined));
  await page.reload();assert.equal(await page.locator('#reward').isVisible(),true);assert.equal((await saved()).cards.length,1);
- await page.locator('#finish').click();await page.locator('button[data-profile="kanachan"]').click();await page.locator('#play').click();
+ await page.locator('#finish').click();await page.locator('button[data-profile="kanachan"]').click();await page.locator('#lines [data-course="hiragana"]').click();
  assert.equal(await page.locator('#writing-modes').isVisible(),true);assert.equal(await page.locator('#mode-trace').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('#recall-grid').isVisible(),false);
  await page.locator('#mode-recall').click();assert.equal(await page.locator('#game').getAttribute('data-recall'),'preview');assert.equal(await page.locator('#recall-countdown').textContent(),'3');
  await page.waitForFunction(()=>document.querySelector('#game').dataset.recall==='writing');assert.equal(await page.locator('#char-label').textContent(),'や');assert.equal(await page.locator('#board').getAttribute('aria-label'),'やを おぼえて書くところ');assert.equal(await page.locator('#recall-grid').isVisible(),true);
@@ -66,7 +66,7 @@ const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='moji
  await page.locator('#mode-trace').click();assert.equal(await page.locator('#mode-trace').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('#recall-grid').isVisible(),false);
  for(const char of ['わ','ゆ']){
   await page.evaluate(char=>{const state=RailCore.fresh();state.settings.pool=[char];localStorage.setItem('mojitetsu_kanachan_state_v2',JSON.stringify(state));},char);
-  await page.reload();await page.locator('#play').click();await page.locator('#mode-recall').click();await page.waitForFunction(()=>document.querySelector('#game').dataset.recall==='writing');
+  await page.reload();await page.locator('#lines [data-course="hiragana"]').click();await page.locator('#mode-recall').click();await page.waitForFunction(()=>document.querySelector('#game').dataset.recall==='writing');
   const count=await page.locator('#strokes path').count();for(let i=0;i<count;i++)await draw(i);
   const savedKana=await page.evaluate(()=>JSON.parse(localStorage.getItem('mojitetsu_kanachan_state_v2')));assert.equal(current(savedKana).stroke,count,char+' all strokes accepted');assert.equal(current(savedKana).complete,true);
  }
