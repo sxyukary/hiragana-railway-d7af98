@@ -3,7 +3,7 @@ const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='moji
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  try{
- const context=await browser.newContext({viewport:{width:768,height:1024},hasTouch:true});const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(BASE);
+ const context=await browser.newContext({serviceWorkers:'block',viewport:{width:768,height:1024},hasTouch:true});const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(BASE);
  // Use actual SVG geometry to verify every supported character, not synthetic stand-ins.
  const results=await page.evaluate(()=>{
   const failures=[];let strokes=0;

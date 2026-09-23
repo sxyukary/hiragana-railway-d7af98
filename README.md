@@ -12,6 +12,17 @@
 
 インターネット公開ではありません。Mac不要で使う工程は後述のGitHub Pages公開です。サイトデータを消すとカードや書き順記録も消えるため、公開先へ移す前に「おうちの方へ → 記録のバックアップと復元」で書き出してください。異なるポート・公開URLの間では自動で記録を引き継ぎません。
 
+## オフライン対応（2026-09-23・ローカル実装）
+
+公開URL（https）で一度開くと、`sw.js`（Service Worker）がアプリ本体・リンクされたファイル・カード写真40枚（合計約17MB）を端末内に保存し、以後は通信がなくても開いて遊べます。
+
+- 版ごとに `mojitetsu-<版>` という保存場所を1つだけ使います。`index.html` の `app-version` を上げると、`sw.js?v=<版>` が新しく入り、新しい版を保存し終えてから古い版を削除します。容量は増え続けません。
+- ページは通信優先（4秒で応答がなければ保存版）、そのほかのファイルは保存版優先です。通信できるときは、これまでどおり最新版が開きます。「アプリを最新に更新」もそのまま使えます。
+- 「おうちの方へ → アプリを最新に更新」に、オフラインの準備状況（写真の保存枚数）を表示します。
+- Service Workerは https か localhost でしか動きません。家庭内サーバー（`http://192.168…`）でiPadから開いた場合は、オフライン機能は無効のままです。iPadでのオフライン確認は公開URLで行います。
+- 同じ版のままファイルを書き換えると、Service Workerが入ったブラウザでは古い保存版が表示されます。公開時は必ず版を上げます。ローカルで確かめるときは、ブラウザのサイトデータを消すか、版を上げてください。
+- 既存のブラウザテストは `serviceWorkers:'block'` で従来どおりに実行し、オフライン動作は `tests/offline-browser.test.cjs` で確認します（全ファイルの保存、通信遮断後のホーム・書く画面・図鑑写真・親向け表示・出典、版更新時の古い保存の削除）。
+
 ## ホーム画面（2026-09-23・のりば版、ローカル実装）
 
 駅のホームをモチーフにしたホーム画面です。上部はその子が最後に手に入れたカードの写真を大きく表示し（未獲得なら500系）、「さいきん あえた でんしゃ」と名前を重ねます。写真の上に発車標（「つぎは 8まいめの カード あと 5もじ」。全カード獲得後は「キラカード」、全キラ後は「きょうの カード」）を置き、写真の手前に駅名標「もじてつ」（駅ナンバーは集めたカード枚数、帯の色は選択中のユーザー色）が立ちます。その下に、のりば（コース）、きっぷ型のユーザー選択（選択中はパンチ穴、各自の図鑑枚数）、図鑑ボタン（最近の3枚）、点字ブロックの順に並びます。
@@ -133,6 +144,7 @@ python3 serve.py
 # 別ターミナルで、必要ならPlaywrightを読み込めるNODE_PATHを指定する。
 NODE_PATH=/Users/sxyukary/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules node tests/browser.test.cjs
 NODE_PATH=/Users/sxyukary/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules node tests/recall-browser.test.cjs
+NODE_PATH=/Users/sxyukary/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules node tests/offline-browser.test.cjs
 ```
 
 テストは既定で `http://127.0.0.1:8228/railway/` とMac標準のChromeを使います。環境変数 `RAIL_TEST_URL`・`CHROME_PATH` で変更できます。アプリ本体にnpmライブラリやビルド作業は不要です。
