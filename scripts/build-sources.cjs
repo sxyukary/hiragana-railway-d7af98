@@ -17,7 +17,8 @@ function renderCharacterLinks(characters) {
   const entries = Object.entries(characters);
   const orderedEntries = [
     ...entries.filter(([character]) => /[ぁ-ゖ]/u.test(character)),
-    ...entries.filter(([character]) => !/[ぁ-ゖ]/u.test(character)),
+    ...entries.filter(([character]) => /[ァ-ヺ]/u.test(character)),
+    ...entries.filter(([character]) => !/[ぁ-ゖァ-ヺ]/u.test(character)),
   ];
   return orderedEntries
     .map(([character, data]) => `    <a href="${escapeHtml(data.source)}">${escapeHtml(character)}</a>`)

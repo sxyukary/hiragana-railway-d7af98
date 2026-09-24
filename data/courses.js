@@ -44,6 +44,12 @@ else{root.MojitetsuData??={};root.MojitetsuData.courses=value;}
     "る",
     "れ"
   ],
+  "katakana": [
+    "シ",
+    "ツ",
+    "ソ",
+    "ン"
+  ],
   "kanji": [
     "一",
     "二",

@@ -12,15 +12,18 @@ const CHARS=Object.values(GROUPS).flat();
 // values are in the 109-unit character coordinate system, not screen pixels.
 const START_TOLERANCE=10,PATH_TOLERANCE=10,END_MARGIN=3;
 const uid=()=>globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
-function fresh(){return{version:2,revision:0,settings:{focus:['や','せ'],pool:[],guide:false},cursor:0,focusCursor:0,kanjiCursor:0,kanjiFocusCursor:0,cards:[],shinyCards:[],sessions:[],activeId:null};}
+function fresh(){return{version:2,revision:0,settings:{focus:['や','せ'],pool:[],guide:false},cursor:0,focusCursor:0,kanjiCursor:0,kanjiFocusCursor:0,katakanaCursor:0,katakanaFocusCursor:0,cards:[],shinyCards:[],sessions:[],activeId:null};}
 function cycle(arr,start,count){return Array.from({length:count},(_,i)=>arr[(start+i)%arr.length]);}
 function question(char){return{char,stroke:0,startedAt:null,complete:false,assisted:false,uncertain:false,records:{}};}
+// Hiragana keeps the original cursor names so older saves continue where they left off.
+const CURSOR_PREFIX={kanji:'kanji',katakana:'katakana'};
 function start(state,course='hiragana'){
- let route=[];const available=GROUPS[course]||GROUPS.hiragana,{pool,focus}=state.settings,selectedPool=pool.filter(c=>available.includes(c)),selectedFocus=focus.filter(c=>available.includes(c)),cursorKey=course==='kanji'?'kanjiCursor':'cursor',focusCursorKey=course==='kanji'?'kanjiFocusCursor':'focusCursor';
+ let route=[];const available=GROUPS[course]||GROUPS.hiragana,{pool,focus}=state.settings,selectedPool=pool.filter(c=>available.includes(c)),selectedFocus=focus.filter(c=>available.includes(c)),cursorKey=CURSOR_PREFIX[course]?CURSOR_PREFIX[course]+'Cursor':'cursor',focusCursorKey=CURSOR_PREFIX[course]?CURSOR_PREFIX[course]+'FocusCursor':'focusCursor';
  state[cursorKey]??=0;state[focusCursorKey]??=0;
  if(selectedPool.length){route=cycle(selectedPool,state[cursorKey],5);state[cursorKey]+=5;}
  else {const f=selectedFocus.length?selectedFocus:[],rest=available.filter(c=>!f.includes(c));const chosen=cycle(f,state[focusCursorKey],Math.min(2,f.length));state[focusCursorKey]+=chosen.length;const other=cycle(rest,state[cursorKey],Math.min(5-chosen.length,rest.length));state[cursorKey]+=other.length;
-  route=[chosen[0],other[0],chosen[1],...other.slice(1)].filter(Boolean);const missing=available.filter(c=>!route.includes(c));while(route.length<5)route.push(missing.shift()||available.find(c=>c!==route.at(-1))||available[0]);}
+  route=[chosen[0],other[0],chosen[1],...other.slice(1)].filter(Boolean);const missing=available.filter(c=>!route.includes(c));// Courses with fewer than five letters keep rotating while filling the set, so no letter is always the extra one.
+  while(route.length<5){const src=rest.length?rest:available,next=src[state[cursorKey]%src.length];if(!missing.length&&next!==route.at(-1)){route.push(next);state[cursorKey]++;}else route.push(missing.shift()||available.find(c=>c!==route.at(-1))||available[0]);}}
  const s={id:uid(),createdAt:new Date().toISOString(),course,questions:route.map(question),guide:state.settings.guide,index:0,reward:null,repeat:false,shinyAwarded:false,orderMistake:false};state.sessions.push(s);state.sessions=state.sessions.slice(-100);state.activeId=s.id;return s;
 }
 function active(state){return state.sessions.find(s=>s.id===state.activeId)||null;}
@@ -34,7 +37,7 @@ function resetCards(state){state.cards=[];state.shinyCards=[];if(active(state)?.
 function discardActive(state){const s=active(state);if(!s||s.reward)return false;state.sessions=state.sessions.filter(item=>item.id!==s.id);state.activeId=null;return true;}
 function validate(x,counts){
  const check=(v,m)=>{if(!v)throw Error(m);},str=v=>typeof v==='string'&&v.length<150,integer=(v,max)=>Number.isInteger(v)&&v>=0&&v<=max,unique=a=>new Set(a).size===a.length;
- check(x&&x.version===2,'対応していない保存形式です');x.kanjiCursor??=0;x.kanjiFocusCursor??=0;check(integer(x.revision,1e9)&&integer(x.cursor,1e9)&&integer(x.focusCursor,1e9)&&integer(x.kanjiCursor,1e9)&&integer(x.kanjiFocusCursor,1e9),'巡回位置が不正です');
+ check(x&&x.version===2,'対応していない保存形式です');x.kanjiCursor??=0;x.kanjiFocusCursor??=0;x.katakanaCursor??=0;x.katakanaFocusCursor??=0;check(integer(x.revision,1e9)&&integer(x.cursor,1e9)&&integer(x.focusCursor,1e9)&&integer(x.kanjiCursor,1e9)&&integer(x.kanjiFocusCursor,1e9)&&integer(x.katakanaCursor,1e9)&&integer(x.katakanaFocusCursor,1e9),'巡回位置が不正です');
  check(x.settings&&typeof x.settings.guide==='boolean','設定が不正です');for(const k of ['focus','pool'])check(Array.isArray(x.settings[k])&&x.settings[k].length<=CHARS.length&&unique(x.settings[k])&&x.settings[k].every(c=>CHARS.includes(c)),'文字の設定が不正です');
  check(Array.isArray(x.cards)&&x.cards.length<=10000&&unique(x.cards)&&x.cards.every(str),'カードの記録が不正です');
  x.shinyCards??=[];check(Array.isArray(x.shinyCards)&&x.shinyCards.length<=x.cards.length&&unique(x.shinyCards)&&x.shinyCards.every(id=>str(id)&&x.cards.includes(id)),'キラカードの記録が不正です');
