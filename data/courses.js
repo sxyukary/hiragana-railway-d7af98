@@ -42,7 +42,15 @@ else{root.MojitetsuData??={};root.MojitetsuData.courses=value;}
     "わ",
     "ら",
     "る",
-    "れ"
+    "れ",
+    "す",
+    "そ",
+    "ぬ",
+    "ね",
+    "め",
+    "ろ",
+    "を",
+    "ん"
   ],
   "katakana": [
     "シ",
