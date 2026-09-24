@@ -22,8 +22,7 @@ function start(state,course='hiragana'){
  state[cursorKey]??=0;state[focusCursorKey]??=0;
  if(selectedPool.length){route=cycle(selectedPool,state[cursorKey],5);state[cursorKey]+=5;}
  else {const f=selectedFocus.length?selectedFocus:[],rest=available.filter(c=>!f.includes(c));const chosen=cycle(f,state[focusCursorKey],Math.min(2,f.length));state[focusCursorKey]+=chosen.length;const other=cycle(rest,state[cursorKey],Math.min(5-chosen.length,rest.length));state[cursorKey]+=other.length;
-  route=[chosen[0],other[0],chosen[1],...other.slice(1)].filter(Boolean);const missing=available.filter(c=>!route.includes(c));// Courses with fewer than five letters keep rotating while filling the set, so no letter is always the extra one.
-  while(route.length<5){const src=rest.length?rest:available,next=src[state[cursorKey]%src.length];if(!missing.length&&next!==route.at(-1)){route.push(next);state[cursorKey]++;}else route.push(missing.shift()||available.find(c=>c!==route.at(-1))||available[0]);}}
+  route=[chosen[0],other[0],chosen[1],...other.slice(1)].filter(Boolean);const missing=available.filter(c=>!route.includes(c));while(route.length<5)route.push(missing.shift()||available.find(c=>c!==route.at(-1))||available[0]);}
  const s={id:uid(),createdAt:new Date().toISOString(),course,questions:route.map(question),guide:state.settings.guide,index:0,reward:null,repeat:false,shinyAwarded:false,orderMistake:false};state.sessions.push(s);state.sessions=state.sessions.slice(-100);state.activeId=s.id;return s;
 }
 function active(state){return state.sessions.find(s=>s.id===state.activeId)||null;}
@@ -81,6 +80,8 @@ function recallFollow(points,input){
  }
  return Number.isFinite(best)?best/drawn.length:null;
 }
+// Largest distance from the straight line joining the first and last points.
+function bend(points){const a=points[0],b=points.at(-1),length=dist(a,b)||1;return Math.max(...points.map(p=>Math.abs((b.y-a.y)*p.x-(b.x-a.x)*p.y+b.x*a.y-b.y*a.x)/length));}
 function recallMatch(paths,input,relaxed=false){
  if(input.length<2)return null;
  const travel=input.slice(1).reduce((n,p,i)=>n+dist(input[i],p),0);
@@ -90,6 +91,8 @@ function recallMatch(paths,input,relaxed=false){
   const source=reverse?path.slice().reverse():path,origin=source[0],shift=dist(origin,input[0]);
   if(shift>14)continue;
   if(relaxed&&travel>source.length*8+80)continue;
+  // The relaxed follower tolerates wobble, so a clearly curved stroke also needs a visibly curved line.
+  if(relaxed){const curve=bend(source);if(curve>12&&bend(input)<curve*.4)continue;}
   let best=null;
   const end=source.at(-1),last=input.at(-1),chord=dist(origin,end);
   let tilt=(Math.atan2(last.y-input[0].y,last.x-input[0].x)-Math.atan2(end.y-origin.y,end.x-origin.x))*180/Math.PI;
