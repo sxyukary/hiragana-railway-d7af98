@@ -22,7 +22,7 @@ assert.equal(C.recallMatch([line],[...line,{x:95,y:10}])?.index,0,'post-end flic
 assert.equal(C.recallMatch([line],[...line,{x:80,y:100},{x:20,y:100}]),null,'do not join multiple strokes after endpoint');
 const other=line.map(p=>({x:p.x,y:p.y+35}));assert.equal(C.recallMatch([line,other],other)?.index,1,'no expected-stroke bias');
 assert.equal(C.recallMatch([line,line],line),null,'identical candidates remain uncertain');
-const state=C.fresh(),s=C.start(state,'kanji');s.writingMode='recall';const q=s.questions[0];q.recallUsed=true;q.stroke=1;q.complete=true;q.ink=[shifted];
+const state=C.fresh(),s=C.start(state,'kanji',()=>0);s.writingMode='recall';const q=s.questions[0];q.recallUsed=true;q.stroke=1;q.complete=true;q.ink=[shifted];
 assert.deepEqual(C.validate(JSON.parse(JSON.stringify(state)),counts).sessions[0].questions[0].ink,[shifted]);
 for(const mutate of [x=>x.sessions[0].writingMode='bad',x=>x.sessions[0].questions[0].ink[0][0].x=Infinity,x=>x.sessions[0].questions[0].ink[0]=Array(129).fill({x:1,y:1}),x=>x.sessions[0].questions[0].ink=[],x=>x.sessions[0].questions[0].recallUsed='yes']){const x=structuredClone(state);mutate(x);assert.throws(()=>C.validate(x,counts));}
 C.resetCards(state);assert.equal(C.active(state).questions[0].ink.length,1,'card reset retains active ink');

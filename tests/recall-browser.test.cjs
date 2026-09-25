@@ -2,6 +2,9 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict');
 const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='mojitetsu_sakkun_state_v2';
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ // Scripted strokes follow a known question order: with Math.random at 0 the shuffle picks in list order.
+ const openContext=browser.newContext.bind(browser);browser.newContext=async options=>{const context=await openContext(options);await context.addInitScript(()=>{Math.random=()=>0;});return context;};
+
  try{
  const context=await browser.newContext({serviceWorkers:'block',viewport:{width:768,height:1024},hasTouch:true});const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(BASE);
  // Use actual SVG geometry to verify every supported character, not synthetic stand-ins.
