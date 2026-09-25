@@ -430,7 +430,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   ],
   [
     "そ",
-    {"paths":["M38.4,22c1.88,1.25,4.98,1.05,7.5,0.38c6.5-1.75,13.25-3.75,19.38-5.38c5.6-1.5,8.3,2.3,3.62,5.25c-12.12,10.87,-31.14,24.4,-42.9,37.75c17,-4.5,40.4,-12.3,54.4,-14c1.64,0.12,3.28,0.24,4.1,0.3c-1.58,2.17,-3.15,4.34,-4.5,6.2c-12,1.5,-33.48,9.38,-33.48,21.38c0,12.88,11.62,20.38,31.5,16.62"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/0305d.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order verified; hairpin clearance optimized"}
+    {"paths":["M38.4,22c1.88,1.25,4.98,1.05,7.5,0.38c6.5-1.75,13.25-3.75,19.38-5.38c4.63-1.23,7.18,2.06,3.62,5.25c-12.12,10.87-31.14,24.4-40,30.25c-6.25,4.12-5.88,5.75,1.38,3.88c17.08-4.42,35.96-8.68,50.12-10.38c9.38-1.12,9.62,0.12,0.5,1.38c-15.82,2.17-34.38,14.25-34.38,26.5c0,12.88,11.62,20.38,31.5,16.62"],"source":"https://github.com/KanjiVG/kanjivg/blob/master/kanji/0305d.svg","viewBox":"0 0 109 109","license":"CC BY-SA 3.0","author":"Ulrich Apel","review":"source-order verified"}
   ],
   [
     "ぬ",

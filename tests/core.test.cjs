@@ -46,3 +46,11 @@ const curve=Array.from({length:101},(_,i)=>({x:30+25*Math.cos(Math.PI*i/100),y:3
 console.log('PASS: rotation, single-letter pool, 100-session cap, idempotent reward, all-collected behavior, validation, assistance classification, tolerant tracing, forward/reverse/shortcut');
 
 const interrupted={stroke:0,assisted:false,records:{}};C.uncertain(interrupted,'cancel');C.assist(interrupted);C.firstRecord(interrupted,'correct',0);assert.equal(interrupted.records['0'].kind,'correct');assert.equal(interrupted.records['0'].assisted,true);assert.equal(interrupted.uncertain,true);console.log('PASS: uncertainty retained while first classifiable choice is recorded after help');
+// A stroke that folds back just below itself (like そ) must survive a wobbling finger, while reversing or stopping short still fails.
+{const fold=[...Array.from({length:31},(_,i)=>({x:30+i,y:40})),...Array.from({length:20},(_,i)=>({x:59-i,y:41.5})),...Array.from({length:30},(_,i)=>({x:40,y:42+i}))];
+const trace=input=>{const list=C.candidates([fold],input[0]);let travel=0;for(let i=1;i<input.length;i++){travel+=C.dist(input[i-1],input[i]);for(const c of list)C.advance(c,input[i-1],input[i]);}return C.resolve(list,travel);};
+const wobble=fold.map((p,i)=>({x:p.x+Math.sin(i*.25)*2,y:p.y+Math.cos(i*.2)*2}));const done=trace(wobble);assert.ok(done&&done.reachedEnd&&!done.reverse,'wobbling trace passes the fold');
+const back=trace(fold.slice().reverse());assert.ok(back&&back.reverse,'reverse trace is still classified as reverse');
+const short=trace(fold.slice(0,45));assert.ok(!short?.reachedEnd,'stopping inside the fold does not complete');
+const strict=C.candidates([fold],wobble[0]).find(c=>!c.reverse);for(let i=1;i<wobble.length&&strict.alive;i++)C.advance(strict,wobble[i-1],wobble[i],10,true);assert.equal(strict.alive,false,'strict backtrack cut-off is unchanged');
+console.log('PASS: tracing follows a fold-back stroke with wobble, keeps reverse and early-stop failures, strict mode unchanged');}
