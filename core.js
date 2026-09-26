@@ -15,8 +15,9 @@ const uid=()=>globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+'-'+Mat
 function fresh(){return{version:2,revision:0,settings:{focus:['や','せ'],pool:[],guide:false},cursor:0,focusCursor:0,kanjiCursor:0,kanjiFocusCursor:0,katakanaCursor:0,katakanaFocusCursor:0,cards:[],shinyCards:[],sessions:[],activeId:null};}
 function question(char){return{char,stroke:0,startedAt:null,complete:false,assisted:false,uncertain:false,records:{}};}
 // Hiragana keeps the original cursor names so older saves continue where they left off.
-// How often each character was asked in the retained sessions of a course (older saves have no course: hiragana).
-function askedCounts(state,course){const n={};for(const s of state.sessions)if((s.course??'hiragana')===course)for(const q of s.questions)n[q.char]=(n[q.char]||0)+1;return n;}
+// How often each character was asked in the last `limit` sessions of a course (older saves have no course: hiragana).
+// Only about one round is counted, so newly added characters catch up within a round instead of monopolising sets.
+function askedCounts(state,course,limit){const n={};for(const s of state.sessions.filter(s=>(s.course??'hiragana')===course).slice(-limit))for(const q of s.questions)n[q.char]=(n[q.char]||0)+1;return n;}
 // Least-asked characters first with random tie-breaks: the order feels shuffled, yet every character comes up evenly.
 // Repeats within one set happen only when fewer characters than questions are available.
 function draw(chars,count,n,rng){const out=[];for(let i=0;i<count&&chars.length;i++){const unused=chars.filter(c=>!out.includes(c)),from=unused.length?unused:chars,min=Math.min(...from.map(c=>n[c]||0)),ties=from.filter(c=>(n[c]||0)===min),c=ties[Math.min(ties.length-1,Math.floor(rng()*ties.length))];n[c]=(n[c]||0)+1;out.push(c);}return out;}
@@ -25,7 +26,7 @@ const CURSOR_PREFIX={kanji:'kanji',katakana:'katakana'};
 function start(state,course='hiragana',rng=Math.random){
  let route=[];const available=GROUPS[course]||GROUPS.hiragana,{pool,focus}=state.settings,selectedPool=pool.filter(c=>available.includes(c)),selectedFocus=focus.filter(c=>available.includes(c)),cursorKey=CURSOR_PREFIX[course]?CURSOR_PREFIX[course]+'Cursor':'cursor',focusCursorKey=CURSOR_PREFIX[course]?CURSOR_PREFIX[course]+'FocusCursor':'focusCursor';
  state[cursorKey]??=0;state[focusCursorKey]??=0;
- const asked=askedCounts(state,course);
+ const asked=askedCounts(state,course,Math.ceil((selectedPool.length||available.length)/5));
  if(selectedPool.length){route=draw(selectedPool,5,asked,rng);state[cursorKey]+=5;}
  else {const f=selectedFocus.length?selectedFocus:[],rest=available.filter(c=>!f.includes(c));const chosen=draw(f,Math.min(2,f.length),asked,rng);state[focusCursorKey]+=chosen.length;const other=draw(rest,Math.min(5-chosen.length,rest.length),asked,rng);state[cursorKey]+=other.length;
   route=[chosen[0],other[0],chosen[1],...other.slice(1)].filter(Boolean);const missing=available.filter(c=>!route.includes(c));while(route.length<5)route.push(missing.shift()||available.find(c=>c!==route.at(-1))||available[0]);}
