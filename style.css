@@ -141,3 +141,9 @@ body.home-screen .topbar{display:none}
 .home-label{margin-top:28px}
 .line-button,.resume-button.primary,.ticket,.collection-button{min-height:132px}
 }
+/* Sound on/off: in the home hero (next to the brand) and in the writing screen's top row. */
+.hero-left{display:flex;align-items:center;gap:10px}.sound-toggle{white-space:nowrap}.hero-sound{min-height:44px;padding:8px 14px;border:none;border-radius:999px;background:#10202473;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-size:16px;font-weight:800;box-shadow:0 4px 14px #0000002e}.sound-toggle[aria-pressed="false"]{opacity:.75}
+@media(max-width:700px){.sound-label{display:none}}
+#round-label,#rest{white-space:nowrap}@media(max-width:450px){.play-top{gap:6px}.play-top button{padding:8px 10px}#stations{gap:4px}#stations span{width:14px}}
+/* The sound button narrows the departure board on phones: keep each part on one line and drop the small "つぎは" label. */
+.departure-board>span{white-space:nowrap}@media(max-width:430px){.departure-label{display:none}.departure-board{padding:8px 10px}.departure-dest{font-size:14px;letter-spacing:0}.departure-left{font-size:12px;letter-spacing:0}}

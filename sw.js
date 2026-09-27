@@ -1,7 +1,7 @@
 /* Offline support. One cache per app version; the page registers sw.js?v=<version>. */
 'use strict';
 const VERSION=new URL(self.location.href).searchParams.get('v')||'dev',CACHE='mojitetsu-'+VERSION,NAV_TIMEOUT=4000;
-// The page shell and every file it links are required. Card photos are best effort.
+// The page shell and every file it links are required. Card photos and sound effects are best effort.
 async function precache(){
  const cache=await caches.open(CACHE),response=await fetch('index.html',{cache:'no-store'});
  if(!response.ok)throw Error('index.html '+response.status);
@@ -10,7 +10,7 @@ async function precache(){
  await cache.addAll([...new Set(linked)]);
  const manifest=await (await cache.match(linked.find(u=>u.startsWith('app.webmanifest')))).json();
  const cards=await (await cache.match(linked.find(u=>u.startsWith('data/cards.js')))).text();
- const photos=[...manifest.icons.map(icon=>icon.src),...[...cards.matchAll(/"image":\s*"([^"]+)"/g)].map(m=>m[1])];
+ const photos=['assets/sound/correct.mp3','assets/sound/kira.mp3','assets/sound/jajaan.mp3',...manifest.icons.map(icon=>icon.src),...[...cards.matchAll(/"image":\s*"([^"]+)"/g)].map(m=>m[1])];
  await Promise.allSettled([...new Set(photos)].map(url=>cache.match(url).then(hit=>hit||cache.add(url))));
 }
 self.addEventListener('install',event=>event.waitUntil(precache().then(()=>self.skipWaiting())));
