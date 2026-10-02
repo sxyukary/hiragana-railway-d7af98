@@ -7,6 +7,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "一",
     {
+      "speech": ["いち", "一番線の", "いち"],
       "reading": "いち",
       "paths": [
         "M11,54.25c3.19,0.62,6.25,0.75,9.73,0.5c20.64-1.5,50.39-5.12,68.58-5.24c3.6-0.02,5.77,0.24,7.57,0.49"
@@ -21,6 +22,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "二",
     {
+      "speech": ["に", "二番線の", "に"],
       "reading": "に",
       "paths": [
         "M25.25,32.4c1.77,0.37,4.78,0.56,6.55,0.37c10.82-1.15,28.82-3.4,41.24-3.76c2.95-0.09,4.73,0.18,6.21,0.36",
@@ -36,6 +38,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "三",
     {
+      "speech": ["さん", "三番線の", "さん"],
       "reading": "さん",
       "paths": [
         "M27.5,23.65c3.09,0.73,6.29,0.36,9.4,0.06c10.2-1,27-2.94,38.97-3.57c3.06-0.16,6.09-0.2,9.14,0.23",
@@ -52,6 +55,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "四",
     {
+      "speech": ["よん", "四番線の", "よん"],
       "reading": "よん",
       "paths": [
         "M14.5,31.48c1.51,1.51,2.25,3.27,2.53,5.2c1.14,7.9,2.61,25.18,4.39,40.83c0.29,2.55,0.34,3.81,0.64,6.24",
@@ -70,6 +74,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "五",
     {
+      "speech": ["ご", "五番線の", "ご"],
       "reading": "ご",
       "paths": [
         "M31.75,23.15c2.8,0.67,5.54,0.42,8.36,0.12c9.3-0.99,22.18-2.4,34.14-3.21c2.49-0.17,5.04-0.33,7.5,0.2",
@@ -87,6 +92,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "六",
     {
+      "speech": ["ろく", "六番線の", "ろく"],
       "reading": "ろく",
       "paths": [
         "M51.87,17.5c1.78,1.78,2.71,3.48,2.71,6.5c0,6.46,0.12,9.16,0.12,14.35",
@@ -104,6 +110,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "七",
     {
+      "speech": ["なな", "七番線の", "なな"],
       "reading": "なな",
       "paths": [
         "M15.5,51.75c1.82,0.5,4.38,0.88,6.96,0.5c16.91-2.45,50.92-8.12,64.44-8.74c3.02-0.14,4.84,0.24,6.35,0.49",
@@ -119,6 +126,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "八",
     {
+      "speech": ["はち", "八番線の", "はち"],
       "reading": "はち",
       "paths": [
         "M37.22,45c0.28,1.5,0.2,3.21-0.86,5.48c-4.23,9.02-11.48,20.4-24.1,32.02",
@@ -134,6 +142,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "九",
     {
+      "speech": ["きゅう", "九番線の", "きゅう"],
       "reading": "きゅう",
       "paths": [
         "M41.88,14.38c1,1.38,1.5,3.25,1.5,5.12c0,40.13-9.12,57.5-28.5,68.75",
@@ -149,6 +158,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "十",
     {
+      "speech": ["じゅう", "十番線の", "じゅう"],
       "reading": "じゅう",
       "paths": [
         "M11.88,50.98c3.18,0.89,6.62,0.61,9.87,0.35c19.92-1.58,45.23-4.76,63.38-5.82c3.85-0.23,7.23-0.07,11,0.56",
@@ -164,6 +174,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "山",
     {
+      "speech": ["やま", "山登りの", "やま"],
       "reading": "やま",
       "paths": [
         "M52.49,15.5c1.38,1.38,2.26,3.5,2.26,5.75c0,0.75-0.22,58.3-0.25,59.25",
@@ -180,6 +191,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "川",
     {
+      "speech": ["かわ", "川遊びの", "かわ"],
       "reading": "かわ",
       "paths": [
         "M27.22,25.68c0.91,1.57,1.18,3.45,1.19,5.37C28.5,43.5,28.5,69,17.39,84.15",
@@ -196,6 +208,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "木",
     {
+      "speech": ["き", "木登りの", "き"],
       "reading": "き",
       "paths": [
         "M19.5,39.86c2.45,0.57,5.23,0.8,8.04,0.57C40.75,39.38,63,36.5,79.78,36.15c2.8-0.06,4.54,0.1,7.34,0.5",
@@ -213,6 +226,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "目",
     {
+      "speech": ["め", "お目目の", "め"],
       "reading": "め",
       "paths": [
         "M29.75,19.05c1.35,1.35,1.86,3.21,1.86,5.47c0,1.77,0.19,42.37,0.06,60.23c-0.04,4.91-0.06,8.11-0.06,8.36",
@@ -231,6 +245,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "月",
     {
+      "speech": ["つき", "お月様の", "つき"],
       "reading": "つき",
       "paths": [
         "M34.25,16.25c1,1,1.48,2.38,1.5,4c0.38,33.62,2.38,59.38-11,73.25",
@@ -248,6 +263,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "上",
     {
+      "speech": ["うえ", "上と下の", "うえ"],
       "reading": "うえ",
       "paths": [
         "M52.31,15.88c1.15,1.15,2.01,3.12,2.01,5.12c0,0.82-0.22,63.62-0.25,64.63",
@@ -264,6 +280,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "下",
     {
+      "speech": ["した", "上と下の", "した"],
       "reading": "した",
       "paths": [
         "M13.25,22.5c0.94,0.23,5.18,0.96,7.74,0.75c17.87-1.5,46.54-4.75,66.38-4.75c2.92,0,6.42,0.75,7.88,1.25",
@@ -280,6 +297,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "日",
     {
+      "speech": ["ひ", "お日様の", "ひ"],
       "reading": "ひ",
       "type": "kanji",
       "paths": [
@@ -298,6 +316,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "口",
     {
+      "speech": ["くち", "お口の", "くち"],
       "reading": "くち",
       "type": "kanji",
       "paths": [
@@ -315,8 +334,8 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "円",
     {
+      "speech": ["えん。", "百円の", "えん。"],
       "reading": "えん",
-      "speech": "えん。",
       "type": "kanji",
       "paths": [
         "M21.75,19.8c0.91,0.91,1.47,3.23,1.5,5.45c0.2,13.9,0.03,47.69,0.03,62.5c0,2-0.03,4.99-0.03,6",
@@ -334,6 +353,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "力",
     {
+      "speech": ["ちから", "力持ちの", "ちから"],
       "reading": "ちから",
       "type": "kanji",
       "paths": [
@@ -350,6 +370,7 @@ else{root.MojitetsuData??={};root.MojitetsuData.characters??={};root.MojitetsuDa
   [
     "大",
     {
+      "speech": ["だい", "大好きの", "だい"],
       "reading": "だい",
       "type": "kanji",
       "paths": [
