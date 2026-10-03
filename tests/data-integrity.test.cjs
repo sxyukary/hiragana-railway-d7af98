@@ -37,8 +37,9 @@ for(const [name,entries]of [['hiragana',hiraganaEntries],['katakana',katakanaEnt
 for(const [char,record]of kanjiEntries)assert.equal(nonempty(record.reading),true,char+' reading must not be empty');
 const speechParts=record=>Array.isArray(record.speech)&&record.speech.length>0&&record.speech.every(nonempty);
 // iPadの読み上げで、あ・お は別々に読むと「ぱ」「ほ」に聞こえ、を は短いと途切れるため例外にする（2026-10-03 実機で確認）
-const kanaSpeechExceptions={'あ':['蟻の あ'],'お':['お化けの お'],'を':['絵を描くの','をー']};
-for(const [char,record]of [...hiraganaEntries,...katakanaEntries])assert.equal(speechParts(record)&&(kanaSpeechExceptions[char]?JSON.stringify(record.speech)===JSON.stringify(kanaSpeechExceptions[char]):record.speech.length===2&&record.speech[0].endsWith('の')&&record.speech[1]===(char==='ヲ'?'を':char)),true,char+' speech must be a word ending in の followed by the character alone');
+// カタカナ1文字の読み上げは不安定（ンが無音）なため、最後の1文字はひらがなで読ませる
+const kanaSpeechExceptions={'あ':['蟻の あ'],'お':['お化けの お'],'を':['絵を描くの','をー'],'ア':['アイスの あ'],'オ':['オムライスの お'],'ヲ':['本を読むの','をー']},spokenKana=char=>/[ァ-ン]/.test(char)?String.fromCharCode(char.charCodeAt(0)-0x60):char;
+for(const [char,record]of [...hiraganaEntries,...katakanaEntries])assert.equal(speechParts(record)&&(kanaSpeechExceptions[char]?JSON.stringify(record.speech)===JSON.stringify(kanaSpeechExceptions[char]):record.speech.length===2&&record.speech[0].endsWith('の')&&record.speech[1]===spokenKana(char)),true,char+' speech must be a word ending in の followed by the character alone in hiragana');
 for(const [char,record]of kanjiEntries)assert.equal(speechParts(record)&&record.speech.length===3&&record.speech[0].startsWith(record.reading)&&record.speech[2]===record.speech[0],true,char+' speech must be reading, word, reading');
 
 const allEntries=[...kanjiEntries,...hiraganaEntries,...katakanaEntries],entryCharacters=allEntries.map(([char])=>char);
