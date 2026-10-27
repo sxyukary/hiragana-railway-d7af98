@@ -11,7 +11,7 @@ textarea{font:inherit}.panel hr{border:0;border-top:1px solid var(--line);margin
 .grouped-options{display:grid;grid-template-columns:1fr 2fr;align-items:start}.option-group{display:flex;flex-wrap:wrap;gap:8px}.option-group strong{flex-basis:100%;font-size:13px;color:var(--muted)}.record-group{font-size:20px}.record-course-meta{margin-left:14px;font-size:13px;color:var(--muted);font-weight:400}.record-course[open]>summary{margin-bottom:6px}.record-course .record{margin:10px 0}
 @media(max-width:700px){.grouped-options{grid-template-columns:1fr}.option-group+ .option-group{margin-top:8px}}
 .char-reading{margin-left:12px;font-size:17px;color:var(--gold);font-weight:800}
-.topbar-actions{display:flex;align-items:center;gap:10px}.profile-chip{display:inline-flex;align-items:center;white-space:nowrap;border-radius:999px;padding:8px 12px;font-weight:800;font-size:14px;background:#e6f3ff;color:#185887;border:2px solid #9dc9ed}body[data-profile="kanachan"] .profile-chip{background:#fff0f6;color:#9a3662;border-color:#f2acc9}
+.topbar-actions{display:flex;align-items:center;gap:10px}.profile-chip{display:inline-flex;align-items:center;white-space:nowrap;border-radius:999px;padding:8px 12px;font-weight:800;font-size:14px;background:#e6f3ff;color:#185887;border:2px solid #9dc9ed}body[data-profile="p2"] .profile-chip{background:#fff0f6;color:#9a3662;border-color:#f2acc9}body[data-profile="guest"] .profile-chip{background:#effaf2;color:#2c6b44;border-color:#a9d8b8}
 @media(max-width:700px){.profile-chip{font-size:12px;padding:7px 9px}}
 /* Shiny cards are a second collection tier; the original photos stay intact. */
 .shiny-progress{margin:-8px 0 20px;color:#755013;font-weight:800}
@@ -48,7 +48,8 @@ textarea{font:inherit}.panel hr{border:0;border-top:1px solid var(--line);margin
 
 /* Home: station platform. Profile colours follow the existing profile chips. */
 body{--accent:#1d5f8c}
-body[data-profile="kanachan"]{--accent:#a23a62}
+body[data-profile="p2"]{--accent:#a23a62}
+body[data-profile="guest"]{--accent:#2f7d4f}
 #home{max-width:860px;display:flex;flex-direction:column;min-height:100dvh;padding-bottom:0}
 body.home-screen .topbar{display:none}
 .hero-photo{position:relative;flex:none;height:clamp(220px,min(38vh,62vw),420px);margin:0 calc(50% - 50vw);overflow:hidden;background:#1f3336}
@@ -88,13 +89,18 @@ body.home-screen .topbar{display:none}
 .resume-button small{font-size:15px;opacity:.9}
 .resume-area #restart{font-size:20px}
 .tickets{display:grid;grid-template-columns:1fr 190px;gap:14px}
-.profile-buttons{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.profile-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.profile-buttons[data-count="1"]{grid-template-columns:minmax(0,1fr)}
 .ticket{position:relative;display:flex;align-items:center;gap:14px;min-height:92px;padding:0 20px;border:3px solid #ddd6c2;border-radius:10px;text-align:left;background-color:#fbf6e4;background-image:repeating-linear-gradient(135deg,#1d5f8c0f 0 6px,transparent 6px 12px)}
-.ticket[data-profile="kanachan"]{background-color:#fcf1ee;background-image:repeating-linear-gradient(135deg,#a23a620f 0 6px,transparent 6px 12px)}
-.ticket[data-profile="sakkun"].selected{border-color:#1d5f8c}
-.ticket[data-profile="kanachan"].selected{border-color:#a23a62}
+.ticket[data-profile="p2"]{background-color:#fcf1ee;background-image:repeating-linear-gradient(135deg,#a23a620f 0 6px,transparent 6px 12px)}
+.ticket[data-profile="guest"]{background-color:#eef7ef;background-image:repeating-linear-gradient(135deg,#2f7d4f0f 0 6px,transparent 6px 12px)}
+.ticket[data-profile="p1"].selected{border-color:#1d5f8c}
+.ticket[data-profile="p2"].selected{border-color:#a23a62}
+.ticket[data-profile="guest"].selected{border-color:#2f7d4f}
 .ticket-badge{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#1d5f8c;color:#fff;font-size:24px;font-weight:900}
-.ticket[data-profile="kanachan"] .ticket-badge{background:#a23a62}
+.ticket[data-profile="p2"] .ticket-badge{background:#a23a62}
+.ticket[data-profile="guest"] .ticket-badge{background:#2f7d4f}
+.ticket-name{overflow:hidden;text-overflow:ellipsis}
+.name-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-weight:700}.name-row input{flex:1;min-width:0;max-width:16em;font:inherit;font-size:18px;padding:8px 10px;border:2px solid #cfc8b4;border-radius:8px}
 .ticket-text{display:flex;flex-direction:column;gap:1px;min-width:0}
 .ticket-name{font-size:24px;font-weight:900;white-space:nowrap}
 .ticket-owned{font-size:13px;color:#4f6264}

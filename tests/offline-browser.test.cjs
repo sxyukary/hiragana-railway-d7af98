@@ -1,5 +1,5 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict');
-const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='mojitetsu_sakkun_state_v2';
+const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='mojitetsu-v3:p1';
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  try{

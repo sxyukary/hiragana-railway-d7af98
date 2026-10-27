@@ -1,5 +1,5 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict');
-const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='mojitetsu_sakkun_state_v2';
+const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='mojitetsu-v3:p1';
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  // Scripted strokes follow a known question order: with Math.random at 0 the shuffle picks in list order.
@@ -61,17 +61,17 @@ const BASE=process.env.RAIL_TEST_URL||'http://127.0.0.1:8228/railway/',KEY='moji
  assert.equal(await page.locator('#reward').isVisible(),true);
  const completed=await saved();assert.equal(completed.cards.length,1);assert.ok(completed.sessions[0].questions.every(q=>q.complete&&q.ink===undefined));
  await page.reload();assert.equal(await page.locator('#reward').isVisible(),true);assert.equal((await saved()).cards.length,1);
- await page.locator('#finish').click();await page.locator('button[data-profile="kanachan"]').click();await page.locator('#lines [data-course="hiragana"]').click();
+ await page.evaluate(()=>localStorage.setItem('mojitetsu-profiles',JSON.stringify({version:1,people:{p2:{name:'テスト2'}}})));await page.reload();await page.locator('#finish').click();await page.locator('button[data-profile="p2"]').click();await page.locator('#lines [data-course="hiragana"]').click();
  assert.equal(await page.locator('#writing-modes').isVisible(),true);assert.equal(await page.locator('#mode-trace').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('#recall-grid').isVisible(),false);
  await page.locator('#mode-recall').click();assert.equal(await page.locator('#game').getAttribute('data-recall'),'preview');assert.equal(await page.locator('#recall-countdown').textContent(),'3');
  await page.waitForFunction(()=>document.querySelector('#game').dataset.recall==='writing');assert.equal(await page.locator('#char-label').textContent(),'や');assert.equal(await page.locator('#board').getAttribute('aria-label'),'やを おぼえて書くところ');assert.equal(await page.locator('#recall-grid').isVisible(),true);
- await draw(0);const kana=await page.evaluate(()=>JSON.parse(localStorage.getItem('mojitetsu_kanachan_state_v2')));assert.equal(current(kana).stroke,1);assert.equal(current(kana).recallUsed,true);assert.equal(await page.locator('#written path').count(),1);
+ await draw(0);const kana=await page.evaluate(()=>JSON.parse(localStorage.getItem('mojitetsu-v3:p2')));assert.equal(current(kana).stroke,1);assert.equal(current(kana).recallUsed,true);assert.equal(await page.locator('#written path').count(),1);
  await page.locator('#mode-trace').click();assert.equal(await page.locator('#mode-trace').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('#recall-grid').isVisible(),false);
  for(const char of ['わ','ゆ']){
-  await page.evaluate(char=>{const state=RailCore.fresh();state.settings.pool=[char];localStorage.setItem('mojitetsu_kanachan_state_v2',JSON.stringify(state));},char);
+  await page.evaluate(char=>{const state=RailCore.fresh();state.settings.pool=[char];localStorage.setItem('mojitetsu-v3:p2',JSON.stringify(state));},char);
   await page.reload();await page.locator('#lines [data-course="hiragana"]').click();await page.locator('#mode-recall').click();await page.waitForFunction(()=>document.querySelector('#game').dataset.recall==='writing');
   const count=await page.locator('#strokes path').count();for(let i=0;i<count;i++)await draw(i);
-  const savedKana=await page.evaluate(()=>JSON.parse(localStorage.getItem('mojitetsu_kanachan_state_v2')));assert.equal(current(savedKana).stroke,count,char+' all strokes accepted');assert.equal(current(savedKana).complete,true);
+  const savedKana=await page.evaluate(()=>JSON.parse(localStorage.getItem('mojitetsu-v3:p2')));assert.equal(current(savedKana).stroke,count,char+' all strokes accepted');assert.equal(current(savedKana).complete,true);
  }
  assert.deepEqual(errors,[]);console.log('PASS countdown, hidden answer, hint, ink, mistakes, release, touch cancellation, resume, mode switches, viewport and JS errors');
  }finally{await browser.close();}
